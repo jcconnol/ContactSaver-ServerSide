@@ -72,7 +72,6 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		this.isDirty = false;
 
 		this.id = ((UUID) rs.getObject(BaseFieldNames.ID));
-		this.createdOn = rs.getTimestamp(BaseFieldNames.CREATED_ON).toLocalDateTime(); 
 
 		this.fillFromRecord(rs);
 	}
