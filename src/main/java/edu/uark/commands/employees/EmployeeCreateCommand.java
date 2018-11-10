@@ -27,6 +27,8 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		//Generate a numeric employee ID of length EMPLOYEE_ID_LENGTH for the new employee,
 		// making sure that the employee ID is not already assigned to another employee.
 		// This field is distinct from the record ID.
+		//TODO change to output that the username already exists, throw UnprocessableEntityException("employee username") if already in database
+		//TODO change Id to username
 		String newEmployeeId;
 		do {
 			newEmployeeId = RandomStringUtils.randomNumeric(EMPLOYEE_ID_LENGTH);
