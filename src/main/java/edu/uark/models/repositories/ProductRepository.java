@@ -8,24 +8,24 @@ import edu.uark.dataaccess.repository.helpers.PostgreFunctionType;
 import edu.uark.dataaccess.repository.helpers.SQLComparisonType;
 import edu.uark.dataaccess.repository.helpers.where.WhereClause;
 import edu.uark.dataaccess.repository.helpers.where.WhereContainer;
-import edu.uark.models.entities.ContactEntity;
-import edu.uark.models.entities.fieldnames.ContactFieldNames;
-import edu.uark.models.repositories.interfaces.ContactRepositoryInterface;
+import edu.uark.models.entities.ProductEntity;
+import edu.uark.models.entities.fieldnames.ProductFieldNames;
+import edu.uark.models.repositories.interfaces.ProductRepositoryInterface;
 
-public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
+public class ProductRepository extends BaseRepository<ProductEntity> implements ProductRepositoryInterface {
 	@Override
-	public ContactEntity byPhoneNumber(String phoneNumber) {
+	public ProductEntity byLookupCode(String lookupCode) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
 					table(this.primaryTable).
-					fieldName(ContactFieldNames.PHONE_NUMBER).
+					fieldName(ProductFieldNames.LOOKUP_CODE).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, phoneNumber.toLowerCase());
+					ps.setObject(1, lookupCode.toLowerCase());
 				} catch (SQLException e) {}
 
 				return ps;
@@ -34,11 +34,11 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 	}
 	
 	@Override
-	public ContactEntity createOne() {
-		return new ContactEntity();
+	public ProductEntity createOne() {
+		return new ProductEntity();
 	}
 	
-	public ContactRepository() {
-		super(DatabaseTable.CONTACT);
+	public ProductRepository() {
+		super(DatabaseTable.PRODUCT);
 	}
 }
