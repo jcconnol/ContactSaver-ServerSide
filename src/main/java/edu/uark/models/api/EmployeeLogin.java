@@ -7,8 +7,8 @@ public class EmployeeLogin {
 	public String getEmployeeUsername() {
 		return this.employeeUsername;
 	}
-	public EmployeeLogin setEmployeeId(String employeeId) {
-		this.employeeUsername = employeeId;
+	public EmployeeLogin setEmployeeUsername(String employeeUsername) {
+		this.employeeUsername = employeeUsername;
 		return this;
 	}
 	private String password;
