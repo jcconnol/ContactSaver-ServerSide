@@ -3,12 +3,12 @@ package edu.uark.models.api;
 import org.apache.commons.lang3.StringUtils;
 
 public class EmployeeLogin {
-	private String employeeId;
-	public String getEmployeeId() {
-		return this.employeeId;
+	private String employeeUsername;
+	public String getEmployeeUsername() {
+		return this.employeeUsername;
 	}
 	public EmployeeLogin setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+		this.employeeUsername = employeeId;
 		return this;
 	}
 	private String password;
@@ -22,6 +22,6 @@ public class EmployeeLogin {
 	
 	public EmployeeLogin() {
 		this.password = StringUtils.EMPTY;
-		this.employeeId = StringUtils.EMPTY;
+		this.employeeUsername = StringUtils.EMPTY;
 	}
 }

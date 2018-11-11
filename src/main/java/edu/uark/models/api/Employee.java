@@ -18,12 +18,12 @@ public class Employee {
 		return this;
 	}
 	
-	private String employeeId;
-	public String getEmployeeId() {
-		return this.employeeId;
+	private String employeeUsername;
+	public String getEmployeeUsername() {
+		return this.employeeUsername;
 	}
-	public Employee setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public Employee setEmployeeUsername(String employeeUsername) {
+		this.employeeUsername = employeeUsername;
 		return this;
 	}
 
@@ -97,7 +97,7 @@ public class Employee {
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
-		this.employeeId = StringUtils.EMPTY;
+		this.employeeUsername = StringUtils.EMPTY;
 		this.createdOn = LocalDateTime.now();
 		this.classification = EmployeeClassification.NOT_DEFINED.getValue();
 	}
@@ -110,7 +110,7 @@ public class Employee {
 		this.createdOn = employeeEntity.getCreatedOn();
 		this.firstName = employeeEntity.getFirstName();
 		this.managerId = employeeEntity.getManagerId();
-		this.employeeId = employeeEntity.getEmployeeId();
+		this.employeeUsername = employeeEntity.getEmployeeId();
 		this.classification = employeeEntity.getClassification().getValue();
 	}
 }

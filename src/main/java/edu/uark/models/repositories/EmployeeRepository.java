@@ -15,17 +15,17 @@ import edu.uark.models.repositories.interfaces.EmployeeRepositoryInterface;
 
 public class EmployeeRepository extends BaseRepository<EmployeeEntity> implements EmployeeRepositoryInterface {
 	@Override
-	public boolean employeeIdExists(String employeeId) {
+	public boolean employeeUsernameExists(String employeeUsername) {
 		return this.existsWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(EmployeeFieldNames.EMPLOYEE_ID).
+					fieldName(EmployeeFieldNames.EMPLOYEE_USERNAME).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, employeeId);
+					ps.setObject(1, employeeUsername);
 				} catch (SQLException e) {}
 
 				return ps;
@@ -34,17 +34,17 @@ public class EmployeeRepository extends BaseRepository<EmployeeEntity> implement
 	}
 	
 	@Override
-	public EmployeeEntity byEmployeeId(String employeeId) {
+	public EmployeeEntity byEmployeeUsername(String employeeUsername) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(EmployeeFieldNames.EMPLOYEE_ID).
+					fieldName(EmployeeFieldNames.EMPLOYEE_USERNAME).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, employeeId);
+					ps.setObject(1, employeeUsername);
 				} catch (SQLException e) {}
 
 				return ps;
