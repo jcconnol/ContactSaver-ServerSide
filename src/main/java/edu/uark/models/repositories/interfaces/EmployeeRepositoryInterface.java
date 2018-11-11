@@ -6,6 +6,6 @@ import edu.uark.models.enums.EmployeeClassification;
 
 public interface EmployeeRepositoryInterface extends BaseRepositoryInterface<EmployeeEntity> {
 	boolean employeeUsernameExists(String employeeUsername);
-	EmployeeEntity byEmployeeUsername(String employeeUsername);
+	EmployeeEntity byEmployeeId(String employeeId);
 	int activeCountByClassification(EmployeeClassification employeeClassification);
 }

@@ -33,7 +33,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 			throw new UnprocessableEntityException("username");
 		}
 		
-		if((new EmployeeRepository()).employeeUsernameExists(this.apiEmployee.getEmployeeUsername())) {
+		if(!(new EmployeeRepository()).employeeUsernameExists(this.apiEmployee.getEmployeeUsername())) {
 			throw new UnprocessableEntityException("username not unique");
 		}
 		

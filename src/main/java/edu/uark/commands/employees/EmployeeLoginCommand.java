@@ -15,11 +15,11 @@ public class EmployeeLoginCommand implements ResultCommandInterface<Employee> {
 	@Override
 	public Employee execute() {
 		//Validations
-		if (StringUtils.isBlank(this.employeeLogin.getEmployeeUsername())) {
+		if (StringUtils.isBlank(this.employeeLogin.getEmployeeId())) {
 			throw new UnprocessableEntityException("employee ID");
 		}
 		
-		EmployeeEntity employeeEntity = this.employeeRepository.byEmployeeUsername(this.employeeLogin.getEmployeeUsername());
+		EmployeeEntity employeeEntity = this.employeeRepository.byEmployeeId(this.employeeLogin.getEmployeeId());
 		if ((employeeEntity == null) || !employeeEntity.getPassword().equals(EmployeeEntity.hashPassword(this.employeeLogin.getPassword()))) {
 			throw new UnauthorizedException();
 		}

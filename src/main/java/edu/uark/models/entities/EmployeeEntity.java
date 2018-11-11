@@ -22,7 +22,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.password = rs.getString(EmployeeFieldNames.PASSWORD);
 		this.lastName = rs.getString(EmployeeFieldNames.LAST_NAME);
 		this.firstName = rs.getString(EmployeeFieldNames.FIRST_NAME);
-		this.employeeUsername = rs.getString(EmployeeFieldNames.EMPLOYEE_USERNAME);
+		this.employeeId= rs.getString(EmployeeFieldNames.EMPLOYEE_ID);
 		this.managerId = ((UUID) rs.getObject(EmployeeFieldNames.MANAGER_ID));
 		this.classification = EmployeeClassification.map(rs.getInt(EmployeeFieldNames.CLASSIFICATION));
 	}
@@ -34,20 +34,20 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		record.put(EmployeeFieldNames.LAST_NAME, this.lastName);
 		record.put(EmployeeFieldNames.FIRST_NAME, this.firstName);
 		record.put(EmployeeFieldNames.MANAGER_ID, this.managerId);
-		record.put(EmployeeFieldNames.EMPLOYEE_USERNAME, this.employeeUsername);
+		record.put(EmployeeFieldNames.EMPLOYEE_ID, this.employeeId);
 		record.put(EmployeeFieldNames.CLASSIFICATION, this.classification.getValue());
 
 		return record;
 	}
 
-	private String employeeUsername;
+	private String employeeId;
 	public String getEmployeeId() {
-		return this.employeeUsername;
+		return this.employeeId;
 	}
 	public EmployeeEntity setEmployeeId(String employeeUsername) {
-		if (!StringUtils.equals(this.employeeUsername, employeeUsername)) {
-			this.employeeUsername = employeeUsername;
-			this.propertyChanged(EmployeeFieldNames.EMPLOYEE_USERNAME);
+		if (!StringUtils.equals(this.employeeId, employeeUsername)) {
+			this.employeeId = employeeUsername;
+			this.propertyChanged(EmployeeFieldNames.EMPLOYEE_ID);
 		}
 		
 		return this;
@@ -145,7 +145,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		
 		apiEmployee.setId(this.getId());
 		apiEmployee.setPassword(StringUtils.EMPTY); //Only send the password over the network when modifying the database.
-		apiEmployee.setEmployeeUsername(this.employeeUsername); //The employee ID may not be changed from a client.
+		apiEmployee.setEmployeeUsername(this.employeeId); //The employee ID may not be changed from a client.
 		apiEmployee.setCreatedOn(this.getCreatedOn());
 		
 		return apiEmployee;
@@ -173,7 +173,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
-		this.employeeUsername = StringUtils.EMPTY;
+		this.employeeId = StringUtils.EMPTY;
 		this.classification = EmployeeClassification.NOT_DEFINED;
 	}
 
@@ -184,7 +184,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.lastName = apiEmployee.getLastName();
 		this.firstName = apiEmployee.getFirstName();
 		this.managerId = apiEmployee.getManagerId();
-		this.employeeUsername = apiEmployee.getEmployeeUsername();
+		this.employeeId = apiEmployee.getEmployeeUsername();
 		this.classification = EmployeeClassification.map(apiEmployee.getClassification());
 		this.password = EmployeeEntity.hashPassword(
 			apiEmployee.getPassword());
