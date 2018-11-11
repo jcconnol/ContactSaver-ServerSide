@@ -6,7 +6,6 @@ import edu.uark.commands.ResultCommandInterface;
 import edu.uark.controllers.exceptions.ConflictException;
 import edu.uark.controllers.exceptions.UnprocessableEntityException;
 import edu.uark.models.api.Product;
-import edu.uark.models.api.enums.ProductApiRequestStatus;
 import edu.uark.models.entities.ProductEntity;
 import edu.uark.models.repositories.ProductRepository;
 import edu.uark.models.repositories.interfaces.ProductRepositoryInterface;
@@ -17,13 +16,11 @@ public class ProductCreateCommand implements ResultCommandInterface<Product> {
 		//Validations
 		if (StringUtils.isBlank(this.apiProduct.getLookupCode())) {
 			throw new UnprocessableEntityException("lookupcode");
-			//return (new Product()).setApiRequestStatus(ProductApiRequestStatus.INVALID_INPUT);
 		}
 
 		ProductEntity productEntity = this.productRepository.byLookupCode(this.apiProduct.getLookupCode());
 		if (productEntity != null) {
-			throw new ConflictException("lookupcode");
-			//productEntity = new ProductEntity(this.apiProduct); //Lookupcode already defined for another product.
+			throw new ConflictException("lookupcode"); //Lookupcode already defined for another product.
 		}
 		
 		//No ENTITY object was returned from the database, thus the API object's lookupcode must be unique.
