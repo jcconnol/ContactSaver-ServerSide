@@ -7,7 +7,7 @@ public class EmployeeLogin {
 	public String getEmployeeId() {
 		return this.employeeId;
 	}
-	public EmployeeLogin setEmployeeUsername(String employeeId) {
+	public EmployeeLogin setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 		return this;
 	}
