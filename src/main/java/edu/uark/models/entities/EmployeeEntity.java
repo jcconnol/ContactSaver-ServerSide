@@ -44,9 +44,9 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 	public String getEmployeeId() {
 		return this.employeeId;
 	}
-	public EmployeeEntity setEmployeeId(String employeeUsername) {
-		if (!StringUtils.equals(this.employeeId, employeeUsername)) {
-			this.employeeId = employeeUsername;
+	public EmployeeEntity setEmployeeId(String employeeId) {
+		if (!StringUtils.equals(this.employeeId, employeeId)) {
+			this.employeeId = employeeId;
 			this.propertyChanged(EmployeeFieldNames.EMPLOYEE_ID);
 		}
 		
@@ -145,7 +145,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		
 		apiEmployee.setId(this.getId());
 		apiEmployee.setPassword(StringUtils.EMPTY); //Only send the password over the network when modifying the database.
-		apiEmployee.setEmployeeUsername(this.employeeId); //The employee ID may not be changed from a client.
+		apiEmployee.setEmployeeId(this.employeeId); //The employee ID may not be changed from a client.
 		apiEmployee.setCreatedOn(this.getCreatedOn());
 		
 		return apiEmployee;
@@ -184,7 +184,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.lastName = apiEmployee.getLastName();
 		this.firstName = apiEmployee.getFirstName();
 		this.managerId = apiEmployee.getManagerId();
-		this.employeeId = apiEmployee.getEmployeeUsername();
+		this.employeeId = apiEmployee.getEmployeeId();
 		this.classification = EmployeeClassification.map(apiEmployee.getClassification());
 		this.password = EmployeeEntity.hashPassword(
 			apiEmployee.getPassword());

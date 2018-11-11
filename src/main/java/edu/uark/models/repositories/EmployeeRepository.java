@@ -15,7 +15,7 @@ import edu.uark.models.repositories.interfaces.EmployeeRepositoryInterface;
 
 public class EmployeeRepository extends BaseRepository<EmployeeEntity> implements EmployeeRepositoryInterface {
 	@Override
-	public boolean employeeUsernameExists(String employeeId) {
+	public boolean employeeIdExists(String employeeId) {
 		return this.existsWhere(
 			new WhereContainer(
 				(new WhereClause()).

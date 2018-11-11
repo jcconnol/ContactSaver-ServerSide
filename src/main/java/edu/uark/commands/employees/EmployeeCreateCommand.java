@@ -29,11 +29,11 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		// This field is distinct from the record ID.
 		//TODO test UnprocessableEntityException("username not unique") if already in database
 		//TODO test changes from employeeId to username
-		if (StringUtils.isBlank(this.apiEmployee.getEmployeeUsername())) {
+		if (StringUtils.isBlank(this.apiEmployee.getEmployeeId())) {
 			throw new UnprocessableEntityException("username");
 		}
 		
-		if(!(new EmployeeRepository()).employeeUsernameExists(this.apiEmployee.getEmployeeUsername())) {
+		if(!(new EmployeeRepository()).employeeIdExists(this.apiEmployee.getEmployeeId())) {
 			throw new UnprocessableEntityException("username not unique");
 		}
 		
@@ -43,7 +43,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 			newEmployeeUsername = RandomStringUtils.randomNumeric(EMPLOYEE_ID_LENGTH);
 		} while (this.employeeRepository.employeeUsernameExists(newEmployeeUsername));*/
 
-		this.apiEmployee.setEmployeeUsername(this.apiEmployee.getEmployeeUsername());
+		this.apiEmployee.setEmployeeId(this.apiEmployee.getEmployeeId());
 
 		EmployeeEntity employeeEntity = new EmployeeEntity(this.apiEmployee); //Create a new ENTITY object from the API object details.
 		employeeEntity.save(); //Write, via an INSERT, the new record to the database.
