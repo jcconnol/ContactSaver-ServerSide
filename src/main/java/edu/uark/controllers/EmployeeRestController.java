@@ -68,15 +68,7 @@ public class EmployeeRestController {
 			setEmployeeLogin(employeeLogin).
 			execute();
 	}
-/*
-	@ResponseBody
-	@RequestMapping(value = "/error", method = RequestMethod.GET)
-	public class CustomizedResponseExceptionHandler extends ResponseEntityExceptionHandler{
-		@ExceptionHandler(UnprocessableEntityException.class)
-		public final ResponseEntity<ErrorDetails> handleUserNotFoundException(UnprocessableEntityException ex, WebRequest request)
-		ErrorDetails errorDetials = new Date(),
-	}
-	*/
+
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
