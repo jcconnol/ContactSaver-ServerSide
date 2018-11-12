@@ -2,12 +2,15 @@ package edu.uark.controllers;
 
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import edu.uark.commands.employees.ActiveEmployeeCountsQuery;
 import edu.uark.commands.employees.EmployeeCreateCommand;
@@ -15,6 +18,7 @@ import edu.uark.commands.employees.EmployeeDeleteCommand;
 import edu.uark.commands.employees.EmployeeLoginCommand;
 import edu.uark.commands.employees.EmployeeQuery;
 import edu.uark.commands.employees.EmployeeUpdateCommand;
+import edu.uark.controllers.exceptions.UnprocessableEntityException;
 import edu.uark.models.api.ActiveEmployeeCounts;
 import edu.uark.models.api.Employee;
 import edu.uark.models.api.EmployeeLogin;
@@ -64,7 +68,15 @@ public class EmployeeRestController {
 			setEmployeeLogin(employeeLogin).
 			execute();
 	}
-
+/*
+	@ResponseBody
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public class CustomizedResponseExceptionHandler extends ResponseEntityExceptionHandler{
+		@ExceptionHandler(UnprocessableEntityException.class)
+		public final ResponseEntity<ErrorDetails> handleUserNotFoundException(UnprocessableEntityException ex, WebRequest request)
+		ErrorDetails errorDetials = new Date(),
+	}
+	*/
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {

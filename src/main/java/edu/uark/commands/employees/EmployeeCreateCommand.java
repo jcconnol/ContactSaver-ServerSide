@@ -3,6 +3,7 @@ package edu.uark.commands.employees;
 import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.commands.ResultCommandInterface;
+import edu.uark.controllers.exceptions.ConflictException;
 import edu.uark.controllers.exceptions.UnprocessableEntityException;
 import edu.uark.models.api.Employee;
 import edu.uark.models.entities.EmployeeEntity;
@@ -32,7 +33,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		}
 		
 		if(this.employeeRepository.employeeIdExists(this.apiEmployee.getEmployeeId())) {
-			throw new UnprocessableEntityException("employee id nonunique");
+			throw new ConflictException("employee id nonunique");
 		}
 		
 		/*
