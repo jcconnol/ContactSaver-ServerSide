@@ -1,6 +1,5 @@
 package edu.uark.commands.employees;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.commands.ResultCommandInterface;
@@ -72,9 +71,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		this.employeeRepository = employeeRepository;
 		return this;
 	}
-	
-	private static final int EMPLOYEE_ID_LENGTH = 4;
-	
+		
 	public EmployeeCreateCommand() {
 		this.employeeRepository = new EmployeeRepository();
 	}
