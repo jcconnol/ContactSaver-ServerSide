@@ -9,15 +9,6 @@ import com.cont.models.entities.EmployeeEntity;
 import com.cont.models.enums.EmployeeClassification;
 
 public class Employee {
-	private UUID id;
-	public UUID getId() {
-		return this.id;
-	}
-	public Employee setId(UUID id) {
-		this.id = id;
-		return this;
-	}
-	
 	private String employeeId;
 	public String getEmployeeId() {
 		return this.employeeId;
@@ -53,33 +44,6 @@ public class Employee {
 		this.password = password;
 		return this;
 	}
-
-	private boolean active;
-	public boolean getActive() {
-		return this.active;
-	}
-	public Employee setActive(boolean active) {
-		this.active = active;
-		return this;
-	}
-
-	private int classification;
-	public int getClassification() {
-		return this.classification;
-	}
-	public Employee setClassification(int classification) {
-		this.classification = classification;
-		return this;
-	}
-
-	private UUID managerId;
-	public UUID getManagerId() {
-		return this.managerId;
-	}
-	public Employee setManagerId(UUID managerId) {
-		this.managerId = managerId;
-		return this;
-	}
 	
 	private LocalDateTime createdOn;
 	public LocalDateTime getCreatedOn() {
@@ -91,26 +55,18 @@ public class Employee {
 	}
 	
 	public Employee() {
-		this.active = false;
-		this.id = new UUID(0, 0);
-		this.managerId = new UUID(0, 0);
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
 		this.employeeId = StringUtils.EMPTY;
 		this.createdOn = LocalDateTime.now();
-		this.classification = EmployeeClassification.NOT_DEFINED.getValue();
 	}
 	
 	public Employee(EmployeeEntity employeeEntity) {
-		this.id = employeeEntity.getId();
 		this.password = StringUtils.EMPTY;
-		this.active = employeeEntity.getActive();
 		this.lastName = employeeEntity.getLastName();
 		this.createdOn = employeeEntity.getCreatedOn();
 		this.firstName = employeeEntity.getFirstName();
-		this.managerId = employeeEntity.getManagerId();
 		this.employeeId = employeeEntity.getEmployeeId();
-		this.classification = employeeEntity.getClassification().getValue();
 	}
 }
