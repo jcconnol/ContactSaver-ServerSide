@@ -11,7 +11,7 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserDeleteCommand implements VoidCommandInterface {
 	@Override
 	public void execute() {
-		UserEntity userEntity = this.userRepository.get(this.userId);
+		UserEntity userEntity = this.userRepository.get(this.userName);
 		if (userEntity == null) { //No record with the associated record ID exists in the database.
 			throw new NotFoundException("User");
 		}
@@ -20,12 +20,12 @@ public class UserDeleteCommand implements VoidCommandInterface {
 	}
 
 	//Properties
-	private UUID userId;
-	public UUID getUserId() {
-		return this.userId;
+	private UUID userName;
+	public UUID getUserName() {
+		return this.userName;
 	}
-	public UserDeleteCommand setUserId(UUID userId) {
-		this.userId = userId;
+	public UserDeleteCommand setUserName(UUID userName) {
+		this.userName = userName;
 		return this;
 	}
 	

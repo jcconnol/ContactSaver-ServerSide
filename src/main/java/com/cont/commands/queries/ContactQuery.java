@@ -21,11 +21,11 @@ public class ContactQuery implements ResultCommandInterface<Contact> {
 	}
 
 	//Properties
-	private String contactName;
-	public String getContactName() {
+	private UUID contactName;
+	public UUID getContactName() {
 		return this.contactName;
 	}
-	public ContactQuery setContactName(String contactName) {
+	public ContactQuery setContactName(UUID contactName) {
 		this.contactName = contactName;
 		return this;
 	}

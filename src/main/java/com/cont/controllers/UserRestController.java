@@ -20,10 +20,10 @@ import com.cont.models.api.UserLogin;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserRestController {
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public User getUser(@PathVariable UUID userId) {
+	@RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+	public User getUser(@PathVariable UUID userName) {
 		return (new UserQuery()).
-			setUserId(userId).
+			setUserName(userName).
 			execute();
 	}
 
@@ -34,18 +34,18 @@ public class UserRestController {
 			execute();
 	}
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-	public User updateEmployee(@PathVariable UUID userId, @RequestBody User user) {
+	@RequestMapping(value = "/{userName}", method = RequestMethod.PUT)
+	public User updateEmployee(@PathVariable UUID userName, @RequestBody User user) {
 		return (new UserUpdateCommand()).
-			setUserId(userId).
+			setUserName(userName).
 			setApiUser(user).
 			execute();
 	}
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-	public void deleteUser(@PathVariable UUID userId) {
+	@RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
+	public void deleteUser(@PathVariable UUID userName) {
 		(new UserDeleteCommand()).
-			setUserId(userId).
+			setUserName(userName).
 			execute();
 	}
 

@@ -27,7 +27,7 @@ public class ContactRestController {
 	}
 
 	@RequestMapping(value = "/{contactName}", method = RequestMethod.GET)
-	public Contact getContact(@PathVariable String contactName) {
+	public Contact getContact(@PathVariable UUID contactName) {
 		return (new ContactQuery()).
 			setContactName(contactName).
 			execute();
@@ -48,7 +48,7 @@ public class ContactRestController {
 	}
 	
 	@RequestMapping(value = "/{contactName}", method = RequestMethod.PUT)
-	public Contact updateProduct(@PathVariable String contactName, @RequestBody Contact contact) {
+	public Contact updateProduct(@PathVariable UUID contactName, @RequestBody Contact contact) {
 		return (new ContactUpdateCommand()).
 			setContactName(contactName).
 			setApiContact(contact).
@@ -56,7 +56,7 @@ public class ContactRestController {
 	}
 	
 	@RequestMapping(value = "/{contactName}", method = RequestMethod.DELETE)
-	public void deleteContact(@PathVariable String contactName) {
+	public void deleteContact(@PathVariable UUID contactName) {
 		(new ContactDeleteCommand()).
 			setContactName(contactName).
 			execute();

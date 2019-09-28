@@ -20,6 +20,11 @@ public class ContactUpdateCommand implements ResultCommandInterface<Contact> {
 			throw new UnprocessableEntityException("name");
 		}
 		
+		ContactEntity contactEntity = this.contactRepository.get(this.contactName);
+		if (contactEntity == null) { //No record with the associated record Name exists in the database.
+			throw new NotFoundException("Contact");
+		}
+		
 		this.apiContact = contactEntity.synchronize(this.apiContact); //Synchronize any incoming changes for UPDATE to the database.
 		
 		contactEntity.save(); //Write, via an UPDATE, any changes to the database.
@@ -28,11 +33,11 @@ public class ContactUpdateCommand implements ResultCommandInterface<Contact> {
 	}
 
 	//Properties
-	private String contactName;
-	public String getContactName() {
+	private UUID contactName;
+	public UUID getContactName() {
 		return this.contactName;
 	}
-	public ContactUpdateCommand setContactName(String contactName) {
+	public ContactUpdateCommand setContactName(UUID contactName) {
 		this.contactName = contactName;
 		return this;
 	}

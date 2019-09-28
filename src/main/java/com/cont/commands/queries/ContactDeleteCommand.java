@@ -20,11 +20,11 @@ public class ContactDeleteCommand implements VoidCommandInterface {
 	}
 
 	//Properties
-	private String contactName;
-	public String getContactName() {
+	private UUID contactName;
+	public UUID getContactName() {
 		return this.contactName;
 	}
-	public ContactDeleteCommand setContactName(String contactName) {
+	public ContactDeleteCommand setContactName(UUID contactName) {
 		this.contactName = contactName;
 		return this;
 	}

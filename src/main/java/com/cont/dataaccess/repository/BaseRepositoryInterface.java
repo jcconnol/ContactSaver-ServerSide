@@ -9,12 +9,12 @@ import com.cont.dataaccess.entities.BaseEntity;
 
 public interface BaseRepositoryInterface<T extends BaseEntity<T>> {
 	int count();
-	T get(String id);
+	T get(UUID id);
 	Collection<T> all();
-	boolean exists(String id);
+	boolean exists(UUID id);
 	String getPrimaryTableName();
 	void saveMany(Collection<T> allToSave);
-	Collection<T> getMany(Collection<String> ids);
+	Collection<T> getMany(Collection<UUID> ids);
 	void deleteMany(Collection<T> allToDelete);
 	Collection<T> inRange(int limit, int offset);
 	void connectAndRun(Consumer<Connection> action);

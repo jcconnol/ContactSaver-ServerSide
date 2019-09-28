@@ -12,7 +12,7 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserQuery implements ResultCommandInterface<User> {
 	@Override
 	public User execute() {
-		UserEntity userEntity = this.userRepository.get(this.userId);
+		UserEntity userEntity = this.userRepository.get(this.userName);
 		if (userEntity != null) {
 			return new User(userEntity);
 		} else {
@@ -21,12 +21,12 @@ public class UserQuery implements ResultCommandInterface<User> {
 	}
 
 	//Properties
-	private UUID userId;
-	public UUID getUserId() {
-		return this.userId;
+	private UUID userName;
+	public UUID getUserName() {
+		return this.userName;
 	}
-	public UserQuery setUserId(UUID userId) {
-		this.userId = userId;
+	public UserQuery setUserName(UUID userName) {
+		this.userName = userName;
 		return this;
 	}
 	

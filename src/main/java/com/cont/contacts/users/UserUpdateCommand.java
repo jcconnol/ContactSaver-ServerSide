@@ -23,7 +23,7 @@ public class UserUpdateCommand implements ResultCommandInterface<User> {
 			throw new UnprocessableEntityException("last name");
 		}
 
-		UserEntity userEntity = this.userRepository.get(this.userId);
+		UserEntity userEntity = this.userRepository.get(this.userName);
 		if (userEntity == null) { //No record with the associated record ID exists in the database.
 			throw new NotFoundException("User");
 		}
@@ -36,12 +36,12 @@ public class UserUpdateCommand implements ResultCommandInterface<User> {
 	}
 	
 	//Properties
-	private UUID userId;
-	public UUID getUserId() {
-		return this.userId;
+	private UUID userName;
+	public UUID getUserName() {
+		return this.userName;
 	}
-	public UserUpdateCommand setUserId(UUID userId) {
-		this.userId = userId;
+	public UserUpdateCommand setUserName(UUID userName) {
+		this.userName = userName;
 		return this;
 	}
 	
