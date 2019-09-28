@@ -2,8 +2,8 @@ package com.cont.dataaccess.repository;
 
 public enum DatabaseTable {
 	NONE(""),
-	PRODUCT("product"),
-	EMPLOYEE("employee"),
+	CONTACT("contact"),
+	USER("user"),
 	UNIQUE("unique");
 	
 	public String getLabel() {

@@ -19,12 +19,7 @@ import com.cont.dataaccess.repository.DatabaseTable;
 public abstract class BaseEntity<T extends BaseEntity<T>> {
 	protected UUID id;
 	public UUID getId() {
-		return id;
-	}
-	
-	protected String employeeId;
-	public String getEmployeeId() {
-		return this.employeeId;
+		return this.id;
 	}
 
 	private LocalDateTime createdOn;
@@ -49,13 +44,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 	}
 
 	private DatabaseTable tableName;
-	
-	@SuppressWarnings("unlikely-arg-type")
 	public String getTableName() {
-		if(tableName.getLabel().equals(DatabaseTable.UNIQUE)) {
-			return this.employeeId;
-		}
-		
 		return tableName.getLabel();
 	}
 	
@@ -82,7 +71,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		this.isNew = false;
 		this.isDirty = false;
 
-		this.employeeId = ((String) rs.getObject(BaseFieldNames.ID));
+		this.id = ((UUID) rs.getObject(BaseFieldNames.ID));
 		this.createdOn = rs.getTimestamp(BaseFieldNames.CREATED_ON).toLocalDateTime(); 
 
 		this.fillFromRecord(rs);
@@ -98,14 +87,14 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 
 			this.save(connection);
 		} catch (SQLException e) {
-			if (this.employeeId != null) {
-				System.err.printf("A SQLException occurred in single record save, %s.  %s\n", this.employeeId, e.getMessage());
+			if (this.id != null) {
+				System.err.printf("A SQLException occurred in single record save, %s.  %s\n", this.id.toString(), e.getMessage());
 			} else {
 				System.err.printf("A SQLException occurred in single record save.  %s\n", e.getMessage());
 			}
 		} catch (URISyntaxException e) {
-			if (this.employeeId != null) {
-				System.err.printf("A URISyntaxException occurred in single record save, %s.  %s\n", this.employeeId, e.getMessage());
+			if (this.id != null) {
+				System.err.printf("A URISyntaxException occurred in single record save, %s.  %s\n", this.id.toString(), e.getMessage());
 			} else {
 				System.err.printf("A URISyntaxException occurred in single record save.  %s\n", e.getMessage());
 			}
@@ -113,9 +102,6 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 	}
 
 	public void save(Connection connection) throws SQLException {
-		//dirty is if record exists and is different
-		
-		//TODO change update record and insert new to, if the database table is named index
 		if (!this.isNew && this.isDirty) {
 			this.updateRecord(connection);
 		} else if (this.isNew) {
@@ -137,7 +123,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		ResultSet rs = ps.executeQuery();
 
 		rs.next();
-		this.employeeId = ((String) rs.getObject(BaseFieldNames.ID));
+		this.id = ((UUID) rs.getObject(BaseFieldNames.ID));
 		this.createdOn = rs.getTimestamp(BaseFieldNames.CREATED_ON).toLocalDateTime();
 	}
 
@@ -222,7 +208,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		for (Object value : values) {
 			ps.setObject(keyIndex++, value);
 		}
-		ps.setObject(keyIndex, this.employeeId);
+		ps.setObject(keyIndex, this.id);
 		
 		return ps;
 	}
@@ -241,14 +227,14 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 
 			this.delete(connection);
 		} catch (SQLException e) {
-			if (this.employeeId != null) {
-				System.err.printf("A SQLException occurred in single record delete, %s.  %s\n", this.employeeId, e.getMessage());
+			if (this.id != null) {
+				System.err.printf("A SQLException occurred in single record delete, %s.  %s\n", this.id.toString(), e.getMessage());
 			} else {
 				System.err.printf("A SQLException occurred in single record delete.  %s\n", e.getMessage());
 			}
 		} catch (URISyntaxException e) {
-			if (this.employeeId != null) {
-				System.err.printf("A URISyntaxException occurred in single record delete, %s.  %s\n", this.employeeId, e.getMessage());
+			if (this.id != null) {
+				System.err.printf("A URISyntaxException occurred in single record delete, %s.  %s\n", this.id.toString(), e.getMessage());
 			} else {
 				System.err.printf("A URISyntaxException occurred in single record delete.  %s\n", e.getMessage());
 			}
@@ -261,7 +247,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		);
 		
 		ps.setQueryTimeout(120);
-		ps.setObject(1, this.employeeId);
+		ps.setObject(1, this.id);
 		ps.execute();
 	}
 	
@@ -301,7 +287,7 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		int result = 1;
 		final int prime = 31;
 
-		return ((prime * result) + ((this.employeeId == null) ? 0 : this.employeeId.hashCode()));
+		return ((prime * result) + ((this.id == null) ? 0 : this.id.hashCode()));
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -318,11 +304,11 @@ public abstract class BaseEntity<T extends BaseEntity<T>> {
 		}
 
 		BaseEntity<?> other = ((BaseEntity<?>) obj);
-		if (this.employeeId == null) {
-			if (other.employeeId != null) {
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!this.employeeId.equals(other.employeeId)) {
+		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
 

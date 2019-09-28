@@ -28,7 +28,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 		return countWhere(null, null);
 	}
 
-	public T get(UUID id) {
+	public T get(String id) {
 		return firstOrDefaultWhere(
 			null,
 			(new WhereContainer(
@@ -52,7 +52,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 		return allWhere(null, null, null, INVALID_INDEX, INVALID_INDEX, null);
 	}
 	
-	public boolean exists(UUID id) {
+	public boolean exists(String id) {
 		return existsWhere(
 			null,
 			(new WhereContainer(
@@ -73,7 +73,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 	}
 	
 	public void saveMany(Collection<T> allToSave) {
-		UUID lastAttemptedId = new UUID(0, 0);
+		String lastAttemptedId = "";
 		
 		try (Connection connection = DatabaseAccessor.getDatabaseConnection()) {
 			try {
@@ -96,6 +96,8 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 			System.err.printf("A URISyntaxException occurred in save many while attempting a connection. %s\n", e.getMessage());
 		}
 	}
+	
+	
 	
 	public Collection<T> getMany(Collection<UUID> ids) {
 		return allWhere(
