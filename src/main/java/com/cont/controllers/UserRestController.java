@@ -17,6 +17,8 @@ import com.cont.contacts.users.UserUpdateCommand;
 import com.cont.models.api.User;
 import com.cont.models.api.UserLogin;
 
+//This is a test of heroku automatic deployment
+
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserRestController {
