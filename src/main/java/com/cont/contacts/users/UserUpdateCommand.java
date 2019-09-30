@@ -23,25 +23,25 @@ public class UserUpdateCommand implements ResultCommandInterface<User> {
 			throw new UnprocessableEntityException("last name");
 		}
 
-		UserEntity userEntity = this.userRepository.get(this.userName);
-		if (userEntity == null) { //No record with the associated record ID exists in the database.
+		UserEntity UserEntity = this.UserRepository.get(this.UserId);
+		if (UserEntity == null) { //No record with the associated record ID exists in the database.
 			throw new NotFoundException("User");
 		}
 		
-		this.apiUser = userEntity.synchronize(this.apiUser); //Synchronize any incoming changes for UPDATE to the database.
+		this.apiUser = UserEntity.synchronize(this.apiUser); //Synchronize any incoming changes for UPDATE to the database.
 		
-		userEntity.save(); //Write, via an UPDATE, any changes to the database.
+		UserEntity.save(); //Write, via an UPDATE, any changes to the database.
 		
 		return this.apiUser;
 	}
 	
 	//Properties
-	private UUID userName;
-	public UUID getUserName() {
-		return this.userName;
+	private UUID UserId;
+	public UUID getUserId() {
+		return this.UserId;
 	}
-	public UserUpdateCommand setUserName(UUID userName) {
-		this.userName = userName;
+	public UserUpdateCommand setUserId(UUID UserId) {
+		this.UserId = UserId;
 		return this;
 	}
 	
@@ -50,20 +50,20 @@ public class UserUpdateCommand implements ResultCommandInterface<User> {
 		return this.apiUser;
 	}
 	public UserUpdateCommand setApiUser(User apiUser) {
-		this.apiUser= apiUser;
+		this.apiUser = apiUser;
 		return this;
 	}
 	
-	private UserRepositoryInterface userRepository;
+	private UserRepositoryInterface UserRepository;
 	public UserRepositoryInterface getUserRepository() {
-		return this.userRepository;
+		return this.UserRepository;
 	}
-	public UserUpdateCommand setUserRepository(UserRepositoryInterface userRepository) {
-		this.userRepository = userRepository;
+	public UserUpdateCommand setUserRepository(UserRepositoryInterface UserRepository) {
+		this.UserRepository = UserRepository;
 		return this;
 	}
 	
 	public UserUpdateCommand() {
-		this.userRepository = new UserRepository();
+		this.UserRepository = new UserRepository();
 	}
 }

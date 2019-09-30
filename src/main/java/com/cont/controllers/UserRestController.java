@@ -25,7 +25,7 @@ public class UserRestController {
 	@RequestMapping(value = "/{userName}", method = RequestMethod.GET)
 	public User getUser(@PathVariable UUID userName) {
 		return (new UserQuery()).
-			setUserName(userName).
+			setUserId(userName).
 			execute();
 	}
 
@@ -39,7 +39,7 @@ public class UserRestController {
 	@RequestMapping(value = "/{userName}", method = RequestMethod.PUT)
 	public User updateEmployee(@PathVariable UUID userName, @RequestBody User user) {
 		return (new UserUpdateCommand()).
-			setUserName(userName).
+			setUserId(userName).
 			setApiUser(user).
 			execute();
 	}
@@ -47,7 +47,7 @@ public class UserRestController {
 	@RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable UUID userName) {
 		(new UserDeleteCommand()).
-			setUserName(userName).
+			setUserId(userName).
 			execute();
 	}
 

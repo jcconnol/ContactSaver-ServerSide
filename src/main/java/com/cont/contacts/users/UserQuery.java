@@ -12,34 +12,34 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserQuery implements ResultCommandInterface<User> {
 	@Override
 	public User execute() {
-		UserEntity userEntity = this.userRepository.get(this.userName);
-		if (userEntity != null) {
-			return new User(userEntity);
+		UserEntity UserEntity = this.UserRepository.get(this.UserId);
+		if (UserEntity != null) {
+			return new User(UserEntity);
 		} else {
 			throw new NotFoundException("User");
 		}
 	}
 
 	//Properties
-	private UUID userName;
-	public UUID getUserName() {
-		return this.userName;
+	private UUID UserId;
+	public UUID getUserId() {
+		return this.UserId;
 	}
-	public UserQuery setUserName(UUID userName) {
-		this.userName = userName;
+	public UserQuery setUserId(UUID UserId) {
+		this.UserId = UserId;
 		return this;
 	}
 	
-	private UserRepositoryInterface userRepository;
-	public UserRepositoryInterface getUserRepository() {
-		return this.userRepository;
+	private UserRepositoryInterface UserRepository;
+	public UserRepositoryInterface getProductRepository() {
+		return this.UserRepository;
 	}
-	public UserQuery setUserRepository(UserRepositoryInterface userRepository) {
-		this.userRepository = userRepository;
+	public UserQuery setProductRepository(UserRepositoryInterface UserRepository) {
+		this.UserRepository = UserRepository;
 		return this;
 	}
 	
 	public UserQuery() {
-		this.userRepository = new UserRepository();
+		this.UserRepository = new UserRepository();
 	}
 }

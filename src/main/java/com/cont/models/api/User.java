@@ -1,12 +1,22 @@
 package com.cont.models.api;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.cont.models.entities.UserEntity;
 
 public class User {
+	private UUID id;
+	public UUID getId() {
+		return this.id;
+	}
+	public User setId(UUID id) {
+		this.id = id;
+		return this;
+	}
+	
 	private String userId;
 	public String getUserId() {
 		return this.userId;
@@ -53,6 +63,7 @@ public class User {
 	}
 	
 	public User() {
+		this.id = new UUID(0, 0);
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
@@ -61,6 +72,7 @@ public class User {
 	}
 	
 	public User(UserEntity userEntity) {
+		this.id = userEntity.getId();
 		this.password = StringUtils.EMPTY;
 		this.lastName = userEntity.getLastName();
 		this.createdOn = userEntity.getCreatedOn();

@@ -15,39 +15,39 @@ public class UserLoginCommand implements ResultCommandInterface<User> {
 	@Override
 	public User execute() {
 		//Validations
-		if (StringUtils.isBlank(this.userLogin.getUserId())) {
+		if (StringUtils.isBlank(this.UserLogin.getUserId())) {
 			throw new UnprocessableEntityException("User ID");
 		}
 		
-		UserEntity userEntity = this.userRepository.byUserId(this.userLogin.getUserId());
-		if ((userEntity == null) || !userEntity.getPassword().equals(UserEntity.hashPassword(this.userLogin.getPassword()))) {
+		UserEntity UserEntity = this.UserRepository.byUserId(this.UserLogin.getUserId());
+		if ((UserEntity == null) || !UserEntity.getPassword().equals(UserEntity.hashPassword(this.UserLogin.getPassword()))) {
 			throw new UnauthorizedException();
 		}
 
-		return new User(userEntity);
+		return new User(UserEntity);
 	}
 
 	//Properties
-	private UserLogin userLogin;
+	private UserLogin UserLogin;
 	public UserLogin getUserLogin() {
-		return this.userLogin;
+		return this.UserLogin;
 	}
-	public UserLoginCommand setUserLogin(UserLogin userLogin) {
-		this.userLogin = userLogin;
+	public UserLoginCommand setUserLogin(UserLogin UserLogin) {
+		this.UserLogin = UserLogin;
 		return this;
 	}
 	
-	private UserRepositoryInterface userRepository;
-	public UserRepositoryInterface getUserRepository() {
-		return this.userRepository;
+	private UserRepositoryInterface UserRepository;
+	public UserRepositoryInterface getProductRepository() {
+		return this.UserRepository;
 	}
-	public UserLoginCommand setUserRepository(UserRepositoryInterface userRepository) {
-		this.userRepository = userRepository;
+	public UserLoginCommand setProductRepository(UserRepositoryInterface UserRepository) {
+		this.UserRepository = UserRepository;
 		return this;
 	}
 	
 	public UserLoginCommand() {
-		this.userLogin = new UserLogin();
-		this.userRepository = new UserRepository();
+		this.UserLogin = new UserLogin();
+		this.UserRepository = new UserRepository();
 	}
 }

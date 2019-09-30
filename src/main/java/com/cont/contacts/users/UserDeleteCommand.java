@@ -11,34 +11,34 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserDeleteCommand implements VoidCommandInterface {
 	@Override
 	public void execute() {
-		UserEntity userEntity = this.userRepository.get(this.userName);
-		if (userEntity == null) { //No record with the associated record ID exists in the database.
+		UserEntity UserEntity = this.UserRepository.get(this.UserId);
+		if (UserEntity == null) { //No record with the associated record ID exists in the database.
 			throw new NotFoundException("User");
 		}
 		
-		userEntity.delete();
+		UserEntity.delete();
 	}
 
 	//Properties
-	private UUID userName;
-	public UUID getUserName() {
-		return this.userName;
+	private UUID UserId;
+	public UUID getUserId() {
+		return this.UserId;
 	}
-	public UserDeleteCommand setUserName(UUID userName) {
-		this.userName = userName;
+	public UserDeleteCommand setUserId(UUID UserId) {
+		this.UserId = UserId;
 		return this;
 	}
 	
-	private UserRepositoryInterface userRepository;
+	private UserRepositoryInterface UserRepository;
 	public UserRepositoryInterface getUserRepository() {
-		return this.userRepository;
+		return this.UserRepository;
 	}
-	public UserDeleteCommand setUserRepository(UserRepositoryInterface userRepository) {
-		this.userRepository = userRepository;
+	public UserDeleteCommand setUserRepository(UserRepositoryInterface UserRepository) {
+		this.UserRepository = UserRepository;
 		return this;
 	}
 	
 	public UserDeleteCommand() {
-		this.userRepository = new UserRepository();
+		this.UserRepository = new UserRepository();
 	}
 }
