@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cont.contacts.users.UserCreateCommand;
-import com.cont.contacts.users.UserDeleteCommand;
-import com.cont.contacts.users.UserLoginCommand;
-import com.cont.contacts.users.UserQuery;
-import com.cont.contacts.users.UserUpdateCommand;
+import com.cont.commands.users.UserCreateCommand;
+import com.cont.commands.users.UserDeleteCommand;
+import com.cont.commands.users.UserLoginCommand;
+import com.cont.commands.users.UserQuery;
+import com.cont.commands.users.UserUpdateCommand;
 import com.cont.models.api.User;
 import com.cont.models.api.UserLogin;
 

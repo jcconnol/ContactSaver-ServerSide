@@ -16,6 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.cont.dataaccess.DatabaseAccessor;
 import com.cont.dataaccess.repository.DatabaseTable;
 
+import com.cont.dataaccess.entities.BaseEntity;
+import com.cont.dataaccess.entities.BaseFieldNames;
+
 public abstract class BaseEntity<T extends BaseEntity<T>> {
 	protected UUID id;
 	public UUID getId() {

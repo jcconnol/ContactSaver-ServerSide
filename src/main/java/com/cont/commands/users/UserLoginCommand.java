@@ -1,4 +1,4 @@
-package com.cont.contacts.users;
+package com.cont.commands.users;
 
 import org.apache.commons.lang3.StringUtils;
 
