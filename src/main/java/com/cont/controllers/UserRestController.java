@@ -22,10 +22,10 @@ import com.cont.models.api.UserLogin;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserRestController {
-	@RequestMapping(value = "/{userName}", method = RequestMethod.GET)
-	public User getUser(@PathVariable UUID userName) {
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	public User getUser(@PathVariable UUID userId) {
 		return (new UserQuery()).
-			setUserId(userName).
+			setUserId(userId).
 			execute();
 	}
 
