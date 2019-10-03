@@ -12,9 +12,10 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserQuery implements ResultCommandInterface<User> {
 	@Override
 	public User execute() {
-		UserEntity UserEntity = this.UserRepository.get(this.UserId);
-		if (UserEntity != null) {
-			return new User(UserEntity);
+		UserEntity userEntity = this.UserRepository.get(this.UserId);
+		if (userEntity != null) {
+			userEntity.setFirstName("John");
+			return new User(userEntity);
 		} else {
 			throw new NotFoundException("User");
 		}
