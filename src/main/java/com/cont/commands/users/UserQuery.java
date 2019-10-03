@@ -2,7 +2,7 @@ package com.cont.commands.users;
 
 import java.util.UUID;
 
-import com.cont.contacts.ResultCommandInterface;
+import com.cont.commands.ResultCommandInterface;
 import com.cont.controllers.exceptions.NotFoundException;
 import com.cont.models.api.User;
 import com.cont.models.entities.UserEntity;
@@ -12,9 +12,8 @@ import com.cont.models.repositories.interfaces.UserRepositoryInterface;
 public class UserQuery implements ResultCommandInterface<User> {
 	@Override
 	public User execute() {
-		UserEntity userEntity = this.UserRepository.get(this.UserId);
+		UserEntity userEntity = this.userRepository.get(this.userId);
 		if (userEntity != null) {
-			userEntity.setFirstName("John");
 			return new User(userEntity);
 		} else {
 			throw new NotFoundException("User");
@@ -22,25 +21,25 @@ public class UserQuery implements ResultCommandInterface<User> {
 	}
 
 	//Properties
-	private UUID UserId;
+	private UUID userId;
 	public UUID getUserId() {
-		return this.UserId;
+		return this.userId;
 	}
-	public UserQuery setUserId(UUID UserId) {
-		this.UserId = UserId;
+	public UserQuery setUserId(UUID userId) {
+		this.userId = userId;
 		return this;
 	}
 	
-	private UserRepositoryInterface UserRepository;
+	private UserRepositoryInterface userRepository;
 	public UserRepositoryInterface getProductRepository() {
-		return this.UserRepository;
+		return this.userRepository;
 	}
-	public UserQuery setProductRepository(UserRepositoryInterface UserRepository) {
-		this.UserRepository = UserRepository;
+	public UserQuery setProductRepository(UserRepositoryInterface userRepository) {
+		this.userRepository = userRepository;
 		return this;
 	}
 	
 	public UserQuery() {
-		this.UserRepository = new UserRepository();
+		this.userRepository = new UserRepository();
 	}
 }
