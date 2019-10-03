@@ -19,7 +19,7 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		this.password = rs.getString(UserFieldNames.PASSWORD);
 		this.lastName = rs.getString(UserFieldNames.LAST_NAME);
 		this.firstName = rs.getString(UserFieldNames.FIRST_NAME);
-		this.UserId = rs.getString(UserFieldNames.USER_ID);
+		this.userId = rs.getString(UserFieldNames.USER_ID);
 	}
 
 	@Override
@@ -27,18 +27,18 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		record.put(UserFieldNames.PASSWORD, this.password);
 		record.put(UserFieldNames.LAST_NAME, this.lastName);
 		record.put(UserFieldNames.FIRST_NAME, this.firstName);
-		record.put(UserFieldNames.USER_ID, this.UserId);
+		record.put(UserFieldNames.USER_ID, this.userId);
 
 		return record;
 	}
 
-	private String UserId;
+	private String userId;
 	public String getUserId() {
-		return this.UserId;
+		return this.userId;
 	}
-	public UserEntity setUserId(String UserId) {
-		if (!StringUtils.equals(this.UserId, UserId)) {
-			this.UserId = UserId;
+	public UserEntity setUserId(String userId) {
+		if (!StringUtils.equals(this.userId, userId)) {
+			this.userId = userId;
 			this.propertyChanged(UserFieldNames.USER_ID);
 		}
 		
@@ -95,7 +95,7 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		
 		apiUser.setId(this.getId());
 		apiUser.setPassword(StringUtils.EMPTY); //Only send the password over the network when modifying the database.
-		apiUser.setUserId(this.UserId); //The User ID may not be changed from a client.
+		apiUser.setUserId(this.userId); //The user ID may not be changed from a client.
 		apiUser.setCreatedOn(this.getCreatedOn());
 		
 		return apiUser;
@@ -121,7 +121,7 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
-		this.UserId = StringUtils.EMPTY;
+		this.userId = StringUtils.EMPTY;
 	}
 
 	public UserEntity(User apiUser) {
@@ -129,7 +129,7 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		
 		this.lastName = apiUser.getLastName();
 		this.firstName = apiUser.getFirstName();
-		this.UserId = apiUser.getUserId();
+		this.userId = apiUser.getUserId();
 		this.password = UserEntity.hashPassword(
 			apiUser.getPassword());
 	}
