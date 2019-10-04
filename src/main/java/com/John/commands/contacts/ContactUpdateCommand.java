@@ -16,51 +16,51 @@ public class ContactUpdateCommand implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
 		//Validations
-		if (StringUtils.isBlank(this.apiProduct.getLookupCode())) {
+		if (StringUtils.isBlank(this.apiContact.getLookupCode())) {
 			throw new UnprocessableEntityException("lookupcode");
 		}
 
-		ContactEntity contactEntity = this.productRepository.get(this.productId);
+		ContactEntity contactEntity = this.contactRepository.get(this.contactId);
 		if (contactEntity == null) { //No record with the associated record ID exists in the database.
-			throw new NotFoundException("Product");
+			throw new NotFoundException("Contact");
 		}
 		
-		this.apiProduct = contactEntity.synchronize(this.apiProduct); //Synchronize any incoming changes for UPDATE to the database.
+		this.apiContact = contactEntity.synchronize(this.apiContact); //Synchronize any incoming changes for UPDATE to the database.
 		
 		contactEntity.save(); //Write, via an UPDATE, any changes to the database.
 		
-		return this.apiProduct;
+		return this.apiContact;
 	}
 
 	//Properties
-	private UUID productId;
-	public UUID getProductId() {
-		return this.productId;
+	private UUID contactId;
+	public UUID getContactId() {
+		return this.contactId;
 	}
-	public ContactUpdateCommand setProductId(UUID productId) {
-		this.productId = productId;
+	public ContactUpdateCommand setContactId(UUID contactId) {
+		this.contactId = contactId;
 		return this;
 	}
 	
-	private Contact apiProduct;
-	public Contact getApiProduct() {
-		return this.apiProduct;
+	private Contact apiContact;
+	public Contact getApiContact() {
+		return this.apiContact;
 	}
-	public ContactUpdateCommand setApiProduct(Contact apiProduct) {
-		this.apiProduct = apiProduct;
+	public ContactUpdateCommand setApiContact(Contact apiContact) {
+		this.apiContact = apiContact;
 		return this;
 	}
 	
-	private ContactRepositoryInterface productRepository;
-	public ContactRepositoryInterface getProductRepository() {
-		return this.productRepository;
+	private ContactRepositoryInterface contactRepository;
+	public ContactRepositoryInterface getContactRepository() {
+		return this.contactRepository;
 	}
-	public ContactUpdateCommand setProductRepository(ContactRepositoryInterface productRepository) {
-		this.productRepository = productRepository;
+	public ContactUpdateCommand setContactRepository(ContactRepositoryInterface contactRepository) {
+		this.contactRepository = contactRepository;
 		return this;
 	}
 	
 	public ContactUpdateCommand() {
-		this.productRepository = new ContactRepository();
+		this.contactRepository = new ContactRepository();
 	}
 }

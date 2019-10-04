@@ -11,34 +11,34 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 public class ContactDeleteCommand implements VoidCommandInterface {
 	@Override
 	public void execute() {
-		ContactEntity contactEntity = this.productRepository.get(this.productId);
+		ContactEntity contactEntity = this.contactRepository.get(this.contactId);
 		if (contactEntity == null) { //No record with the associated record ID exists in the database.
-			throw new NotFoundException("Product");
+			throw new NotFoundException("Contact");
 		}
 		
 		contactEntity.delete();
 	}
 
 	//Properties
-	private UUID productId;
-	public UUID getProductId() {
-		return this.productId;
+	private UUID contactId;
+	public UUID getContactId() {
+		return this.contactId;
 	}
-	public ContactDeleteCommand setProductId(UUID productId) {
-		this.productId = productId;
+	public ContactDeleteCommand setContactId(UUID contactId) {
+		this.contactId = contactId;
 		return this;
 	}
 	
-	private ContactRepositoryInterface productRepository;
-	public ContactRepositoryInterface getProductRepository() {
-		return this.productRepository;
+	private ContactRepositoryInterface contactRepository;
+	public ContactRepositoryInterface getContactRepository() {
+		return this.contactRepository;
 	}
-	public ContactDeleteCommand setProductRepository(ContactRepositoryInterface productRepository) {
-		this.productRepository = productRepository;
+	public ContactDeleteCommand setContactRepository(ContactRepositoryInterface contactRepository) {
+		this.contactRepository = contactRepository;
 		return this;
 	}
 	
 	public ContactDeleteCommand() {
-		this.productRepository = new ContactRepository();
+		this.contactRepository = new ContactRepository();
 	}
 }

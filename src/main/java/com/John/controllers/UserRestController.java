@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.John.commands.users.ActiveUserCountsQuery;
 import com.John.commands.users.UserCreateCommand;
 import com.John.commands.users.UserDeleteCommand;
 import com.John.commands.users.UserLoginCommand;
 import com.John.commands.users.UserQuery;
 import com.John.commands.users.UserUpdateCommand;
-import com.John.models.api.ActiveUserCounts;
 import com.John.models.api.User;
 import com.John.models.api.UserLogin;
 
@@ -27,13 +25,6 @@ public class UserRestController {
 		return (new UserQuery()).
 			setUserId(userId).
 			execute();
-	}
-	
-	@RequestMapping(value = "/activecounts/{classification}", method = RequestMethod.GET)
-	public ActiveUserCounts getActiveUserCounts(@PathVariable int classification) {
-		return (new ActiveUserCountsQuery()).
-				setUserClassification(classification)
-				.execute();
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)

@@ -11,7 +11,7 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	@Override
 	public List<Contact> execute() {
-		return this.productRepository.
+		return this.contactRepository.
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
@@ -19,16 +19,16 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	}
 
 	//Properties
-	private ContactRepositoryInterface productRepository;
-	public ContactRepositoryInterface getProductRepository() {
-		return this.productRepository;
+	private ContactRepositoryInterface contactRepository;
+	public ContactRepositoryInterface getContactRepository() {
+		return this.contactRepository;
 	}
-	public ContactsQuery setProductRepository(ContactRepositoryInterface productRepository) {
-		this.productRepository = productRepository;
+	public ContactsQuery setContactRepository(ContactRepositoryInterface contactRepository) {
+		this.contactRepository = contactRepository;
 		return this;
 	}
 	
 	public ContactsQuery() {
-		this.productRepository = new ContactRepository();
+		this.contactRepository = new ContactRepository();
 	}
 }
