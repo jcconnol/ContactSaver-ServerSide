@@ -21,6 +21,7 @@ public class ContactCreateCommand implements ResultCommandInterface<Contact> {
 		ContactEntity contactEntity = this.contactRepository.byName(this.apiContact.getName());
 		if (contactEntity != null) {
 			throw new ConflictException("name"); //Lookupcode already defined for another contact.
+
 		}
 		
 		//No ENTITY object was returned from the database, thus the API object's lookupcode must be unique.
