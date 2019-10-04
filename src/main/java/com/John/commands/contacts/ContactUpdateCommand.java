@@ -16,8 +16,8 @@ public class ContactUpdateCommand implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
 		//Validations
-		if (StringUtils.isBlank(this.apiContact.getLookupCode())) {
-			throw new UnprocessableEntityException("lookupcode");
+		if (StringUtils.isBlank(this.apiContact.getName())) {
+			throw new UnprocessableEntityException("name");
 		}
 
 		ContactEntity contactEntity = this.contactRepository.get(this.contactId);

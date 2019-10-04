@@ -14,13 +14,13 @@ public class ContactCreateCommand implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
 		//Validations
-		if (StringUtils.isBlank(this.apiContact.getLookupCode())) {
-			throw new UnprocessableEntityException("lookupcode");
+		if (StringUtils.isBlank(this.apiContact.getName())) {
+			throw new UnprocessableEntityException("name");
 		}
 
-		ContactEntity contactEntity = this.contactRepository.byLookupCode(this.apiContact.getLookupCode());
+		ContactEntity contactEntity = this.contactRepository.byName(this.apiContact.getName());
 		if (contactEntity != null) {
-			throw new ConflictException("lookupcode"); //Lookupcode already defined for another contact.
+			throw new ConflictException("name"); //Lookupcode already defined for another contact.
 		}
 		
 		//No ENTITY object was returned from the database, thus the API object's lookupcode must be unique.

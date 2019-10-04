@@ -10,14 +10,14 @@ import com.John.models.entities.ContactEntity;
 import com.John.models.repositories.ContactRepository;
 import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
-public class ContactByLookupCodeQuery implements ResultCommandInterface<Contact> {
+public class ContactByNameQuery implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
-		if (StringUtils.isBlank(this.lookupCode)) {
-			throw new UnprocessableEntityException("lookupcode");
+		if (StringUtils.isBlank(this.Name)) {
+			throw new UnprocessableEntityException("name");
 		}
 		
-		ContactEntity contactEntity = this.contactRepository.byLookupCode(this.lookupCode);
+		ContactEntity contactEntity = this.contactRepository.byName(this.Name);
 		if (contactEntity != null) {
 			return new Contact(contactEntity);
 		} else {
@@ -26,12 +26,12 @@ public class ContactByLookupCodeQuery implements ResultCommandInterface<Contact>
 	}
 
 	//Properties
-	private String lookupCode;
-	public String getLookupCode() {
-		return this.lookupCode;
+	private String Name;
+	public String getName() {
+		return this.Name;
 	}
-	public ContactByLookupCodeQuery setLookupCode(String lookupCode) {
-		this.lookupCode = lookupCode;
+	public ContactByNameQuery setName(String Name) {
+		this.Name = Name;
 		return this;
 	}
 	
@@ -39,12 +39,12 @@ public class ContactByLookupCodeQuery implements ResultCommandInterface<Contact>
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
 	}
-	public ContactByLookupCodeQuery setContactRepository(ContactRepositoryInterface contactRepository) {
+	public ContactByNameQuery setContactRepository(ContactRepositoryInterface contactRepository) {
 		this.contactRepository = contactRepository;
 		return this;
 	}
 	
-	public ContactByLookupCodeQuery() {
+	public ContactByNameQuery() {
 		this.contactRepository = new ContactRepository();
 	}
 }
