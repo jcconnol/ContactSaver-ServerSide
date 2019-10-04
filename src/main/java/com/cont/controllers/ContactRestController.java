@@ -26,10 +26,10 @@ public class ContactRestController {
 		return (new ContactsQuery()).execute();
 	}
 
-	@RequestMapping(value = "/{contactName}", method = RequestMethod.GET)
-	public Contact getContact(@PathVariable UUID contactName) {
+	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
+	public Contact getContact(@PathVariable UUID contactId) {
 		return (new ContactQuery()).
-			setContactName(contactName).
+			setContactId(contactId).
 			execute();
 	}
 

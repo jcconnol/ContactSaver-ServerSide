@@ -31,10 +31,10 @@ public class UserQuery implements ResultCommandInterface<User> {
 	}
 	
 	private UserRepositoryInterface userRepository;
-	public UserRepositoryInterface getProductRepository() {
+	public UserRepositoryInterface getContactRepository() {
 		return this.userRepository;
 	}
-	public UserQuery setProductRepository(UserRepositoryInterface userRepository) {
+	public UserQuery setContactRepository(UserRepositoryInterface userRepository) {
 		this.userRepository = userRepository;
 		return this;
 	}
