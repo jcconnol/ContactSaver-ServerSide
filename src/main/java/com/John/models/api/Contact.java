@@ -15,21 +15,21 @@ public class Contact {
 		return this;
 	}
 	
-	private String lookupCode;
-	public String getLookupCode() {
-		return this.lookupCode;
+	private String name;
+	public String getName() {
+		return this.name;
 	}
-	public Contact setLookupCode(String lookupCode) {
-		this.lookupCode = lookupCode;
+	public Contact setName(String name) {
+		this.name = name;
 		return this;
 	}
 	
-	private int count;
-	public int getCount() {
-		return this.count;
+	private int number;
+	public int getNumber() {
+		return this.number;
 	}
-	public Contact setCount(int count) {
-		this.count = count;
+	public Contact setNumber(int number) {
+		this.number = number;
 		return this;
 	}
 	
@@ -43,16 +43,16 @@ public class Contact {
 	}
 	
 	public Contact() {
-		this.count = -1;
-		this.lookupCode = "";
+		this.number = -1;
+		this.name = "";
 		this.id = new UUID(0, 0);
 		this.createdOn = LocalDateTime.now();
 	}
 	
 	public Contact(ContactEntity contactEntity) {
 		this.id = contactEntity.getId();
-		this.count = contactEntity.getCount();
+		this.number = contactEntity.getCount();
 		this.createdOn = contactEntity.getCreatedOn();
-		this.lookupCode = contactEntity.getLookupCode();
+		this.name = contactEntity.getName();
 	}
 }

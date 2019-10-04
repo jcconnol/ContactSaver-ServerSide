@@ -14,26 +14,26 @@ import com.John.models.entities.fieldnames.ContactFieldNames;
 public class ContactEntity extends BaseEntity<ContactEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-		this.lookupCode = rs.getString(ContactFieldNames.LOOKUP_CODE);
-		this.count = rs.getInt(ContactFieldNames.COUNT);
+		this.name = rs.getString(ContactFieldNames.NAME);
+		this.count = rs.getInt(ContactFieldNames.NUMBER);
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		record.put(ContactFieldNames.LOOKUP_CODE, this.lookupCode);
-		record.put(ContactFieldNames.COUNT, this.count);
+		record.put(ContactFieldNames.NAME, this.name);
+		record.put(ContactFieldNames.NUMBER, this.count);
 		
 		return record;
 	}
 
-	private String lookupCode;
-	public String getLookupCode() {
-		return this.lookupCode;
+	private String name;
+	public String getName() {
+		return this.name;
 	}
-	public ContactEntity setLookupCode(String lookupCode) {
-		if (!StringUtils.equals(this.lookupCode, lookupCode)) {
-			this.lookupCode = lookupCode;
-			this.propertyChanged(ContactFieldNames.LOOKUP_CODE);
+	public ContactEntity setName(String name) {
+		if (!StringUtils.equals(this.name, name)) {
+			this.name = name;
+			this.propertyChanged(ContactFieldNames.NAME);
 		}
 		
 		return this;
@@ -46,15 +46,15 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 	public ContactEntity setCount(int count) {
 		if (this.count != count) {
 			this.count = count;
-			this.propertyChanged(ContactFieldNames.COUNT);
+			this.propertyChanged(ContactFieldNames.NUMBER);
 		}
 		
 		return this;
 	}
 	
 	public Contact synchronize(Contact apiContact) {
-		this.setCount(apiContact.getCount());
-		this.setLookupCode(apiContact.getLookupCode());
+		this.setCount(apiContact.getNumber());
+		this.setName(apiContact.getName());
 		
 		apiContact.setId(this.getId());
 		apiContact.setCreatedOn(this.getCreatedOn());
@@ -66,13 +66,13 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		super(DatabaseTable.CONTACT);
 		
 		this.count = -1;
-		this.lookupCode = StringUtils.EMPTY;
+		this.name = StringUtils.EMPTY;
 	}
 	
 	public ContactEntity(Contact apiContact) {
 		super(DatabaseTable.CONTACT);
 		
-		this.count = apiContact.getCount();
-		this.lookupCode = apiContact.getLookupCode();
+		this.count = apiContact.getNumber();
+		this.name = apiContact.getName();
 	}
 }

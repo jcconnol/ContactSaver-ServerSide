@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.John.commands.contacts.ContactByLookupCodeQuery;
+import com.John.commands.contacts.ContactByNameQuery;
 import com.John.commands.contacts.ContactCreateCommand;
 import com.John.commands.contacts.ContactDeleteCommand;
 import com.John.commands.contacts.ContactQuery;
@@ -21,22 +21,18 @@ import com.John.models.api.Contact;
 @RestController
 @RequestMapping(value = "/api/contact")
 public class ContactRestController {
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Contact> getContacts() {
-		return (new ContactsQuery()).execute();
-	}
 
 	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
-	public Contact getContact(@PathVariable UUID contactId) {
-		return (new ContactQuery()).
+	public List<Contact> getContacts(@PathVariable UUID contactId) {
+		return (new ContactsQuery()).
 			setContactId(contactId).
 			execute();
 	}
 
-	@RequestMapping(value = "/byLookupCode/{contactLookupCode}", method = RequestMethod.GET)
-	public Contact getContactByLookupCode(@PathVariable String contactLookupCode) {
-		return (new ContactByLookupCodeQuery()).
-			setLookupCode(contactLookupCode).
+	@RequestMapping(value = "/byName/{contactName}", method = RequestMethod.GET)
+	public Contact getContactByName(@PathVariable String contactName) {
+		return (new ContactByNameQuery()).
+			setName(contactName).
 			execute();
 	}
 	

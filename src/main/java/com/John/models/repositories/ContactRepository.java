@@ -1,6 +1,7 @@
 package com.John.models.repositories;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 import com.John.dataaccess.repository.BaseRepository;
 import com.John.dataaccess.repository.DatabaseTable;
@@ -14,18 +15,37 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
 	@Override
-	public ContactEntity byLookupCode(String lookupCode) {
+	public ContactEntity byName(String name) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
 					table(this.primaryTable).
-					fieldName(ContactFieldNames.LOOKUP_CODE).
+					fieldName(ContactFieldNames.NAME).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, lookupCode.toLowerCase());
+					ps.setObject(1, name.toLowerCase());
+				} catch (SQLException e) {}
+
+				return ps;
+			}
+		);
+	}
+	
+	public ContactEntity byUserId(UUID userId) {
+		return this.firstOrDefaultWhere(
+			new WhereContainer(
+				(new WhereClause()).
+					postgreFunction(PostgreFunctionType.LOWER).
+					table(this.primaryTable).
+					fieldName(ContactFieldNames.ID).
+					comparison(SQLComparisonType.EQUALS)
+			),
+			(ps) -> {
+				try {
+					ps.setObject(1, userId);
 				} catch (SQLException e) {}
 
 				return ps;

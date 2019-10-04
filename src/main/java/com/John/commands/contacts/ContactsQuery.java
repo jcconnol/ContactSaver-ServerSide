@@ -1,6 +1,7 @@
 package com.John.commands.contacts;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.John.commands.ResultCommandInterface;
@@ -17,8 +18,17 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 			map(mp -> (new Contact(mp))).
 			collect(Collectors.toList());
 	}
-
+	
 	//Properties
+	private UUID contactId;
+	public UUID getContactId() {
+		return contactId;
+	}
+	public ContactsQuery setContactId(UUID contactId) {
+		this.contactId = contactId;
+		return this;
+	}
+	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
