@@ -6,6 +6,15 @@ import java.util.UUID;
 import com.cont.models.entities.ContactEntity;
 
 public class Contact {
+	private UUID id;
+	public UUID getId() {
+		return this.id;
+	}
+	public Contact setId(UUID id) {
+		this.id = id;
+		return this;
+	}
+	
 	private String name;
 	public String getName() {
 		return this.name;
@@ -34,12 +43,14 @@ public class Contact {
 	}
 	
 	public Contact() {
+		this.id = new UUID(0,0);
 		this.name = "";
 		this.number = 0;
 		this.createdOn = LocalDateTime.now();
 	}
 	
 	public Contact(ContactEntity contactEntity) {
+		this.id = contactEntity.getId();
 		this.number = contactEntity.getNumber();
 		this.createdOn = contactEntity.getCreatedOn();
 		this.name = contactEntity.getName();

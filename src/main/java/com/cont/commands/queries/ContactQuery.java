@@ -12,7 +12,7 @@ import com.cont.models.repositories.interfaces.ContactRepositoryInterface;
 public class ContactQuery implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
-		ContactEntity contactEntity = this.contactRepository.get(this.contactName);
+		ContactEntity contactEntity = this.contactRepository.get(this.contactId);
 		if (contactEntity != null) {
 			return new Contact(contactEntity);
 		} else {
@@ -21,12 +21,12 @@ public class ContactQuery implements ResultCommandInterface<Contact> {
 	}
 
 	//Properties
-	private UUID contactName;
-	public UUID getContactName() {
-		return this.contactName;
+	private UUID contactId;
+	public UUID getContactId() {
+		return this.contactId;
 	}
-	public ContactQuery setContactName(UUID contactName) {
-		this.contactName = contactName;
+	public ContactQuery setContactId(UUID contactId) {
+		this.contactId = contactId;
 		return this;
 	}
 	

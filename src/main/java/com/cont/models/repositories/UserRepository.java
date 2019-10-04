@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import com.cont.dataaccess.repository.BaseRepository;
 import com.cont.dataaccess.repository.DatabaseTable;
 import com.cont.dataaccess.repository.helpers.SQLComparisonType;
+import com.cont.dataaccess.repository.helpers.SQLConditionalType;
 import com.cont.dataaccess.repository.helpers.where.WhereClause;
 import com.cont.dataaccess.repository.helpers.where.WhereContainer;
 import com.cont.models.entities.UserEntity;
