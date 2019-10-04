@@ -14,25 +14,25 @@ import com.John.models.entities.fieldnames.ContactFieldNames;
 public class ContactEntity extends BaseEntity<ContactEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-		this.lookupCode = rs.getString(ContactFieldNames.NAME);
+		this.name = rs.getString(ContactFieldNames.NAME);
 		this.count = rs.getInt(ContactFieldNames.NUMBER);
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		record.put(ContactFieldNames.NAME, this.lookupCode);
+		record.put(ContactFieldNames.NAME, this.name);
 		record.put(ContactFieldNames.NUMBER, this.count);
 		
 		return record;
 	}
 
-	private String lookupCode;
-	public String getLookupCode() {
-		return this.lookupCode;
+	private String name;
+	public String getName() {
+		return this.name;
 	}
-	public ContactEntity setLookupCode(String lookupCode) {
-		if (!StringUtils.equals(this.lookupCode, lookupCode)) {
-			this.lookupCode = lookupCode;
+	public ContactEntity setName(String name) {
+		if (!StringUtils.equals(this.name, name)) {
+			this.name = name;
 			this.propertyChanged(ContactFieldNames.NAME);
 		}
 		
@@ -54,7 +54,7 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 	
 	public Contact synchronize(Contact apiContact) {
 		this.setCount(apiContact.getNumber());
-		this.setLookupCode(apiContact.getName());
+		this.setName(apiContact.getName());
 		
 		apiContact.setId(this.getId());
 		apiContact.setCreatedOn(this.getCreatedOn());
@@ -66,13 +66,13 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		super(DatabaseTable.CONTACT);
 		
 		this.count = -1;
-		this.lookupCode = StringUtils.EMPTY;
+		this.name = StringUtils.EMPTY;
 	}
 	
 	public ContactEntity(Contact apiContact) {
 		super(DatabaseTable.CONTACT);
 		
 		this.count = apiContact.getNumber();
-		this.lookupCode = apiContact.getName();
+		this.name = apiContact.getName();
 	}
 }

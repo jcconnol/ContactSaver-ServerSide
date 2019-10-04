@@ -53,6 +53,6 @@ public class Contact {
 		this.id = contactEntity.getId();
 		this.number = contactEntity.getCount();
 		this.createdOn = contactEntity.getCreatedOn();
-		this.name = contactEntity.getLookupCode();
+		this.name = contactEntity.getName();
 	}
 }
