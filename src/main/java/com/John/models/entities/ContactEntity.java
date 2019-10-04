@@ -52,14 +52,14 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		return this;
 	}
 	
-	public Contact synchronize(Contact apiProduct) {
-		this.setCount(apiProduct.getCount());
-		this.setLookupCode(apiProduct.getLookupCode());
+	public Contact synchronize(Contact apiContact) {
+		this.setCount(apiContact.getCount());
+		this.setLookupCode(apiContact.getLookupCode());
 		
-		apiProduct.setId(this.getId());
-		apiProduct.setCreatedOn(this.getCreatedOn());
+		apiContact.setId(this.getId());
+		apiContact.setCreatedOn(this.getCreatedOn());
 		
-		return apiProduct;
+		return apiContact;
 	}
 	
 	public ContactEntity() {
@@ -69,10 +69,10 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		this.lookupCode = StringUtils.EMPTY;
 	}
 	
-	public ContactEntity(Contact apiProduct) {
+	public ContactEntity(Contact apiContact) {
 		super(DatabaseTable.CONTACT);
 		
-		this.count = apiProduct.getCount();
-		this.lookupCode = apiProduct.getLookupCode();
+		this.count = apiContact.getCount();
+		this.lookupCode = apiContact.getLookupCode();
 	}
 }

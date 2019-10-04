@@ -19,52 +19,52 @@ import com.John.commands.contacts.ContactsQuery;
 import com.John.models.api.Contact;
 
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping(value = "/api/contact")
 public class ContactRestController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Contact> getProducts() {
+	public List<Contact> getContacts() {
 		return (new ContactsQuery()).execute();
 	}
 
-	@RequestMapping(value = "/{productId}", method = RequestMethod.GET)
-	public Contact getProduct(@PathVariable UUID productId) {
+	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
+	public Contact getContact(@PathVariable UUID contactId) {
 		return (new ContactQuery()).
-			setProductId(productId).
+			setContactId(contactId).
 			execute();
 	}
 
-	@RequestMapping(value = "/byLookupCode/{productLookupCode}", method = RequestMethod.GET)
-	public Contact getProductByLookupCode(@PathVariable String productLookupCode) {
+	@RequestMapping(value = "/byLookupCode/{contactLookupCode}", method = RequestMethod.GET)
+	public Contact getContactByLookupCode(@PathVariable String contactLookupCode) {
 		return (new ContactByLookupCodeQuery()).
-			setLookupCode(productLookupCode).
+			setLookupCode(contactLookupCode).
 			execute();
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public Contact createProduct(@RequestBody Contact contact) {
+	public Contact createContact(@RequestBody Contact contact) {
 		return (new ContactCreateCommand()).
-			setApiProduct(contact).
+			setApiContact(contact).
 			execute();
 	}
 	
-	@RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
-	public Contact updateProduct(@PathVariable UUID productId, @RequestBody Contact contact) {
+	@RequestMapping(value = "/{contactId}", method = RequestMethod.PUT)
+	public Contact updateContact(@PathVariable UUID contactId, @RequestBody Contact contact) {
 		return (new ContactUpdateCommand()).
-			setProductId(productId).
-			setApiProduct(contact).
+			setContactId(contactId).
+			setApiContact(contact).
 			execute();
 	}
 	
-	@RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
-	public void deleteProduct(@PathVariable UUID productId) {
+	@RequestMapping(value = "/{contactId}", method = RequestMethod.DELETE)
+	public void deleteContact(@PathVariable UUID contactId) {
 		(new ContactDeleteCommand()).
-			setProductId(productId).
+			setContactId(contactId).
 			execute();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "Successful test. (ProductRestController)";
+		return "Successful test. (ContactRestController)";
 	}
 }

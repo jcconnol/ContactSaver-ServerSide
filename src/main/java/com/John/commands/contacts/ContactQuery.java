@@ -12,34 +12,34 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 public class ContactQuery implements ResultCommandInterface<Contact> {
 	@Override
 	public Contact execute() {
-		ContactEntity contactEntity = this.productRepository.get(this.productId);
+		ContactEntity contactEntity = this.contactRepository.get(this.contactId);
 		if (contactEntity != null) {
 			return new Contact(contactEntity);
 		} else {
-			throw new NotFoundException("Product");
+			throw new NotFoundException("Contact");
 		}
 	}
 
 	//Properties
-	private UUID productId;
-	public UUID getProductId() {
-		return this.productId;
+	private UUID contactId;
+	public UUID getContactId() {
+		return this.contactId;
 	}
-	public ContactQuery setProductId(UUID productId) {
-		this.productId = productId;
+	public ContactQuery setContactId(UUID contactId) {
+		this.contactId = contactId;
 		return this;
 	}
 	
-	private ContactRepositoryInterface productRepository;
-	public ContactRepositoryInterface getProductRepository() {
-		return this.productRepository;
+	private ContactRepositoryInterface contactRepository;
+	public ContactRepositoryInterface getContactRepository() {
+		return this.contactRepository;
 	}
-	public ContactQuery setProductRepository(ContactRepositoryInterface productRepository) {
-		this.productRepository = productRepository;
+	public ContactQuery setContactRepository(ContactRepositoryInterface contactRepository) {
+		this.contactRepository = contactRepository;
 		return this;
 	}
 	
 	public ContactQuery() {
-		this.productRepository = new ContactRepository();
+		this.contactRepository = new ContactRepository();
 	}
 }

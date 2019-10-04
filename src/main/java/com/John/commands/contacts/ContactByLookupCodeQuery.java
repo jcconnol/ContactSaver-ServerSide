@@ -17,11 +17,11 @@ public class ContactByLookupCodeQuery implements ResultCommandInterface<Contact>
 			throw new UnprocessableEntityException("lookupcode");
 		}
 		
-		ContactEntity contactEntity = this.productRepository.byLookupCode(this.lookupCode);
+		ContactEntity contactEntity = this.contactRepository.byLookupCode(this.lookupCode);
 		if (contactEntity != null) {
 			return new Contact(contactEntity);
 		} else {
-			throw new NotFoundException("Product");
+			throw new NotFoundException("Contact");
 		}
 	}
 
@@ -35,16 +35,16 @@ public class ContactByLookupCodeQuery implements ResultCommandInterface<Contact>
 		return this;
 	}
 	
-	private ContactRepositoryInterface productRepository;
-	public ContactRepositoryInterface getProductRepository() {
-		return this.productRepository;
+	private ContactRepositoryInterface contactRepository;
+	public ContactRepositoryInterface getContactRepository() {
+		return this.contactRepository;
 	}
-	public ContactByLookupCodeQuery setProductRepository(ContactRepositoryInterface productRepository) {
-		this.productRepository = productRepository;
+	public ContactByLookupCodeQuery setContactRepository(ContactRepositoryInterface contactRepository) {
+		this.contactRepository = contactRepository;
 		return this;
 	}
 	
 	public ContactByLookupCodeQuery() {
-		this.productRepository = new ContactRepository();
+		this.contactRepository = new ContactRepository();
 	}
 }

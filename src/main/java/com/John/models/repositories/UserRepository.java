@@ -10,7 +10,6 @@ import com.John.dataaccess.repository.helpers.where.WhereClause;
 import com.John.dataaccess.repository.helpers.where.WhereContainer;
 import com.John.models.entities.UserEntity;
 import com.John.models.entities.fieldnames.UserFieldNames;
-import com.John.models.enums.UserClassification;
 import com.John.models.repositories.interfaces.UserRepositoryInterface;
 
 public class UserRepository extends BaseRepository<UserEntity> implements UserRepositoryInterface {
@@ -45,32 +44,6 @@ public class UserRepository extends BaseRepository<UserEntity> implements UserRe
 			(ps) -> {
 				try {
 					ps.setObject(1, userId);
-				} catch (SQLException e) {}
-
-				return ps;
-			}
-		);
-	}
-	
-	@Override
-	public int activeCountByClassification(UserClassification userClassification) {
-		return this.countWhere(
-			new WhereContainer(
-				(new WhereClause()).
-					table(this.primaryTable).
-					fieldName(UserFieldNames.CLASSIFICATION).
-					comparison(SQLComparisonType.EQUALS)
-			).addWhereClause(
-				(new WhereClause()).
-					conditional(SQLConditionalType.AND).
-					table(this.primaryTable).
-					fieldName(UserFieldNames.ACTIVE).
-					comparison(SQLComparisonType.EQUALS)
-			),
-			(ps) -> {
-				try {
-					ps.setObject(1, userClassification.getValue());
-					ps.setObject(2, true);
 				} catch (SQLException e) {}
 
 				return ps;

@@ -13,29 +13,22 @@ import com.John.dataaccess.entities.BaseEntity;
 import com.John.dataaccess.repository.DatabaseTable;
 import com.John.models.api.User;
 import com.John.models.entities.fieldnames.UserFieldNames;
-import com.John.models.enums.UserClassification;
 
 public class UserEntity extends BaseEntity<UserEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-		this.active = rs.getBoolean(UserFieldNames.ACTIVE);
 		this.password = rs.getString(UserFieldNames.PASSWORD);
 		this.lastName = rs.getString(UserFieldNames.LAST_NAME);
 		this.firstName = rs.getString(UserFieldNames.FIRST_NAME);
 		this.userId = rs.getString(UserFieldNames.USER_ID);
-		this.managerId = ((UUID) rs.getObject(UserFieldNames.MANAGER_ID));
-		this.classification = UserClassification.map(rs.getInt(UserFieldNames.CLASSIFICATION));
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		record.put(UserFieldNames.ACTIVE, this.active);
 		record.put(UserFieldNames.PASSWORD, this.password);
 		record.put(UserFieldNames.LAST_NAME, this.lastName);
 		record.put(UserFieldNames.FIRST_NAME, this.firstName);
-		record.put(UserFieldNames.MANAGER_ID, this.managerId);
 		record.put(UserFieldNames.USER_ID, this.userId);
-		record.put(UserFieldNames.CLASSIFICATION, this.classification.getValue());
 
 		return record;
 	}
@@ -91,52 +84,10 @@ public class UserEntity extends BaseEntity<UserEntity> {
 		
 		return this;
 	}
-
-	private boolean active;
-	public boolean getActive() {
-		return this.active;
-	}
-	public UserEntity setActive(boolean active) {
-		if (this.active != active) {
-			this.active = active;
-			this.propertyChanged(UserFieldNames.ACTIVE);
-		}
-		
-		return this;
-	}
-
-	private UserClassification classification;
-	public UserClassification getClassification() {
-		return this.classification;
-	}
-	public UserEntity setClassification(UserClassification classification) {
-		if (this.classification != classification) {
-			this.classification = classification;
-			this.propertyChanged(UserFieldNames.CLASSIFICATION);
-		}
-		
-		return this;
-	}
-
-	private UUID managerId;
-	public UUID getManagerId() {
-		return this.managerId;
-	}
-	public UserEntity setManagerId(UUID managerId) {
-		if (!this.managerId.equals(managerId)) {
-			this.managerId = managerId;
-			this.propertyChanged(UserFieldNames.MANAGER_ID);
-		}
-		
-		return this;
-	}
 	
 	public User synchronize(User apiUser) {
-		this.setActive(apiUser.getActive());
 		this.setLastName(apiUser.getLastName());
 		this.setFirstName(apiUser.getFirstName());
-		this.setManagerId(apiUser.getManagerId());
-		this.setClassification(UserClassification.map(apiUser.getClassification()));
 		if (!StringUtils.isBlank(apiUser.getPassword())) {
 			this.setPassword(
 				UserEntity.hashPassword(
@@ -168,24 +119,18 @@ public class UserEntity extends BaseEntity<UserEntity> {
 	public UserEntity() {
 		super(DatabaseTable.USER);
 		
-		this.active = false;
-		this.managerId = new UUID(0, 0);
 		this.lastName = StringUtils.EMPTY;
 		this.password = StringUtils.EMPTY;
 		this.firstName = StringUtils.EMPTY;
 		this.userId = StringUtils.EMPTY;
-		this.classification = UserClassification.NOT_DEFINED;
 	}
 
 	public UserEntity(User apiUser) {
 		super(DatabaseTable.USER);
 		
-		this.active = apiUser.getActive();
 		this.lastName = apiUser.getLastName();
 		this.firstName = apiUser.getFirstName();
-		this.managerId = apiUser.getManagerId();
 		this.userId = apiUser.getUserId();
-		this.classification = UserClassification.map(apiUser.getClassification());
 		this.password = UserEntity.hashPassword(
 			apiUser.getPassword());
 	}
