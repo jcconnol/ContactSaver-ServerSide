@@ -3,7 +3,7 @@ package com.cont.commands.queries;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.cont.contacts.ResultCommandInterface;
+import com.cont.commands.ResultCommandInterface;
 import com.cont.models.api.Contact;
 import com.cont.models.repositories.ContactRepository;
 import com.cont.models.repositories.interfaces.ContactRepositoryInterface;

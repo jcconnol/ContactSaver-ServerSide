@@ -2,7 +2,7 @@ package com.cont.commands.queries;
 
 import java.util.UUID;
 
-import com.cont.contacts.VoidCommandInterface;
+import com.cont.commands.VoidCommandInterface;
 import com.cont.controllers.exceptions.NotFoundException;
 import com.cont.models.entities.ContactEntity;
 import com.cont.models.repositories.ContactRepository;

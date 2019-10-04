@@ -2,7 +2,7 @@ package com.cont.commands.users;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.cont.contacts.ResultCommandInterface;
+import com.cont.commands.ResultCommandInterface;
 import com.cont.controllers.exceptions.UnauthorizedException;
 import com.cont.controllers.exceptions.UnprocessableEntityException;
 import com.cont.models.api.User;
