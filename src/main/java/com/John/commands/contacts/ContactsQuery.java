@@ -1,5 +1,6 @@
 package com.John.commands.contacts;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,8 +24,15 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 			stream().
 			map(mp -> (new Contact(mp))).
 			collect(Collectors.groupingBy(Contact::getId));
+		List<Contact> compilation = new ArrayList<Contact>();
 		
-		return contacts.values().stream().collect(Collectors.toList()).get(0);
+		for(int mainList = 0; mainList < contacts.values().stream().collect(Collectors.toList()).size(); mainList++) {
+			for(int inList = 0; inList < contacts.values().stream().collect(Collectors.toList()).get(inList).size(); inList++) {
+				compilation.add(contacts.values().stream().collect(Collectors.toList()).get(mainList).get(inList));
+			}	
+		}
+		
+		return compilation;
 	}
 	
 	//Properties
