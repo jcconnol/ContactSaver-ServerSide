@@ -49,6 +49,7 @@ public abstract class BaseRepository<T extends BaseEntity<T>> implements BaseRep
 	}
 	
 	public Collection<T> all() {
+		System.out.print("got Here");
 		return allWhere(null, null, null, INVALID_INDEX, INVALID_INDEX, null);
 	}
 	
