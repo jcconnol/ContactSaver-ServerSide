@@ -1,6 +1,7 @@
 package com.John.commands.contacts;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -15,17 +16,15 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Contact> execute() {
-		return (List<Contact>) this.contactRepository.
+		Map<UUID, List<Contact>> contacts = this.contactRepository.
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
-			collect(Collectors.groupingBy(Contact::getId,
-					                      Collectors.toList()
-					                      )
-					);
+			collect(Collectors.groupingBy(Contact::getId));
+		
+		return contacts.values().stream().collect(Collectors.toList()).get(0);
 	}
 	
 	//Properties
