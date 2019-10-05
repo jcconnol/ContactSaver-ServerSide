@@ -36,8 +36,7 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 		);
 	}
 	
-	@Override
-	public ContactEntity byUserId(String userId) {
+	public ContactEntity byContactId(String userId) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).

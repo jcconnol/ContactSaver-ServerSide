@@ -23,7 +23,7 @@ import com.John.models.api.Contact;
 public class ContactRestController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Contact> getContacts() {//@PathVariable UUID contactId) {
+	public List<Contact> getContacts() {
 		return (new ContactsQuery()).
 			//setContactId(contactId).
 			execute();

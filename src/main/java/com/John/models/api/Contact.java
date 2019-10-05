@@ -6,11 +6,11 @@ import java.util.UUID;
 import com.John.models.entities.ContactEntity;
 
 public class Contact {
-	private UUID id;
-	public UUID getId() {
+	private String id;
+	public String getId() {
 		return this.id;
 	}
-	public Contact setId(UUID id) {
+	public Contact setId(String id) {
 		this.id = id;
 		return this;
 	}
@@ -45,13 +45,13 @@ public class Contact {
 	public Contact() {
 		this.number = -1;
 		this.name = "";
-		this.id = new UUID(0, 0);
+		this.id = "";
 		this.createdOn = LocalDateTime.now();
 	}
 	
 	public Contact(ContactEntity contactEntity) {
-		this.id = contactEntity.getId();
-		this.number = contactEntity.getCount();
+		this.id = contactEntity.getContactId();
+		this.number = contactEntity.getNumber();
 		this.createdOn = contactEntity.getCreatedOn();
 		this.name = contactEntity.getName();
 	}
