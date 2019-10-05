@@ -17,18 +17,18 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
 	@Override
-	public ContactEntity byName(String name) {
+	public ContactEntity byOwnerId(String ownerId) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
 					table(this.primaryTable).
-					fieldName(ContactFieldNames.NAME).
+					fieldName(ContactFieldNames.OWNER_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, name.toLowerCase());
+					ps.setObject(1, ownerId);
 				} catch (SQLException e) {}
 
 				return ps;
@@ -36,22 +36,24 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 		);
 	}
 	
-	public ContactEntity byContactId(String userId) {
+	@Override
+	public ContactEntity byName(String name) {
 		return this.firstOrDefaultWhere(
-			new WhereContainer(
-				(new WhereClause()).
-					table(this.primaryTable).
-					fieldName(ContactFieldNames.ID).
-					comparison(SQLComparisonType.EQUALS)
-			),
-			(ps) -> {
-				try {
-					ps.setObject(1, userId);
-				} catch (SQLException e) {}
+				new WhereContainer(
+					(new WhereClause()).
+						postgreFunction(PostgreFunctionType.LOWER).
+						table(this.primaryTable).
+						fieldName(ContactFieldNames.NAME).
+						comparison(SQLComparisonType.EQUALS)
+				),
+				(ps) -> {
+					try {
+						ps.setObject(1, name.toLowerCase());
+					} catch (SQLException e) {}
 
-				return ps;
-			}
-		);
+					return ps;
+				}
+			);
 	}
 	
 	@Override

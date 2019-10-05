@@ -17,26 +17,27 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 		this.name = rs.getString(ContactFieldNames.NAME);
 		this.number = rs.getInt(ContactFieldNames.NUMBER);
-		this.id = rs.getString(ContactFieldNames.ID);
+		this.ownerId = rs.getString(ContactFieldNames.OWNER_ID);
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(ContactFieldNames.NAME, this.name);
 		record.put(ContactFieldNames.NUMBER, this.number);
-		record.put(ContactFieldNames.ID, this.id);
+		record.put(ContactFieldNames.OWNER_ID, this.ownerId);
 		
 		return record;
 	}
 	
-	private String id;
-	public String getContactId() {
-		return this.id;
+	private String ownerId;
+	public String getOwnerId() {
+		return this.ownerId;
 	}
-	public ContactEntity setContactId(String id) {
-		this.id = id;
-		this.propertyChanged(ContactFieldNames.ID);
-		
+	public ContactEntity setOwnerId(String ownerId) {
+		if (!StringUtils.equals(this.ownerId, ownerId)) {
+			this.ownerId = ownerId;
+			this.propertyChanged(ContactFieldNames.OWNER_ID);
+		}
 		return this;
 	} 
 	
@@ -69,8 +70,9 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 	public Contact synchronize(Contact apiContact) {
 		this.setNumber(apiContact.getNumber());
 		this.setName(apiContact.getName());
-		this.setContactId(apiContact.getId());
+		this.setOwnerId(apiContact.getOwnerId());
 		
+		apiContact.setId(this.getId());
 		apiContact.setCreatedOn(this.getCreatedOn());
 		
 		return apiContact;
@@ -81,7 +83,7 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		
 		this.number = -1;
 		this.name = StringUtils.EMPTY;
-		this.id = StringUtils.EMPTY;
+		this.ownerId = StringUtils.EMPTY;
 	}
 	
 	public ContactEntity(Contact apiContact) {
@@ -89,6 +91,6 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 		
 		this.number = apiContact.getNumber();
 		this.name = apiContact.getName();
-		this.id = apiContact.getId();
+		this.ownerId = apiContact.getOwnerId();
 	}
 }

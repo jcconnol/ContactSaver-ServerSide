@@ -35,15 +35,14 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	}
 	
 	//Properties
-	/*
-	private UUID contactId;
-	public UUID getContactId() {
-		return contactId;
+	private String ownerId;
+	public String getOwnerId() {
+		return ownerId;
 	}
-	public ContactsQuery setContactId(UUID contactId) {
-		this.contactId = contactId;
+	public ContactsQuery setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 		return this;
-	}*/
+	}
 	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {

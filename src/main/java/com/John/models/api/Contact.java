@@ -6,12 +6,21 @@ import java.util.UUID;
 import com.John.models.entities.ContactEntity;
 
 public class Contact {
-	private String id;
-	public String getId() {
+	private UUID id;
+	public UUID getId() {
 		return this.id;
 	}
-	public Contact setId(String id) {
+	public Contact setId(UUID id) {
 		this.id = id;
+		return this;
+	}
+	
+	private String ownerId;
+	public String getOwnerId() {
+		return this.ownerId;
+	}
+	public Contact setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 		return this;
 	}
 	
@@ -45,12 +54,14 @@ public class Contact {
 	public Contact() {
 		this.number = -1;
 		this.name = "";
-		this.id = "";
+		this.id = new UUID(0,0);
+		this.ownerId = "";
 		this.createdOn = LocalDateTime.now();
 	}
 	
 	public Contact(ContactEntity contactEntity) {
-		this.id = contactEntity.getContactId();
+		this.id = contactEntity.getId();
+		this.ownerId = contactEntity.getOwnerId();
 		this.number = contactEntity.getNumber();
 		this.createdOn = contactEntity.getCreatedOn();
 		this.name = contactEntity.getName();
