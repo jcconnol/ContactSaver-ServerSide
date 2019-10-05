@@ -5,4 +5,5 @@ import com.John.models.entities.ContactEntity;
 
 public interface ContactRepositoryInterface extends BaseRepositoryInterface<ContactEntity> {
 	ContactEntity byName(String name);
+	ContactEntity byUserId(String userId);
 }

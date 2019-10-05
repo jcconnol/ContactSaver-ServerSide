@@ -10,7 +10,9 @@ import com.John.dataaccess.repository.helpers.SQLComparisonType;
 import com.John.dataaccess.repository.helpers.where.WhereClause;
 import com.John.dataaccess.repository.helpers.where.WhereContainer;
 import com.John.models.entities.ContactEntity;
+import com.John.models.entities.UserEntity;
 import com.John.models.entities.fieldnames.ContactFieldNames;
+import com.John.models.entities.fieldnames.UserFieldNames;
 import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
@@ -34,13 +36,13 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 		);
 	}
 	
-	public ContactEntity byUserId(UUID userId) {
+	@Override
+	public ContactEntity byUserId(String userId) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
-					postgreFunction(PostgreFunctionType.LOWER).
 					table(this.primaryTable).
-					fieldName(ContactFieldNames.ID).
+					fieldName(UserFieldNames.USER_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {

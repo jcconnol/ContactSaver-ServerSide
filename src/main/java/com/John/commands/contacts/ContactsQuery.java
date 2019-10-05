@@ -19,7 +19,11 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	
 	@Override
 	public List<Contact> execute() {
-		return this.contactRepository.all().stream().map(mp -> (new Contact(mp))).collect(Collectors.toList());
+		return this.contactRepository.
+				all().
+				stream().
+				map(mp -> (new Contact(mp))).
+				collect(Collectors.toList());
 		/*
 		Map<UUID, List<Contact>> allContacts = this.contactRepository.
 			all().
@@ -44,7 +48,7 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
 	}
-	public ContactsQuery setContactRepository(ContactRepositoryInterface contactRepository) {
+	public ContactsQuery setProductRepository(ContactRepositoryInterface contactRepository) {
 		this.contactRepository = contactRepository;
 		return this;
 	}
