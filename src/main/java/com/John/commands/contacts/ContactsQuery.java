@@ -5,18 +5,27 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.John.commands.ResultCommandInterface;
+import com.John.controllers.exceptions.NotFoundException;
 import com.John.models.api.Contact;
+import com.John.models.api.User;
+import com.John.models.entities.ContactEntity;
+import com.John.models.entities.UserEntity;
 import com.John.models.repositories.ContactRepository;
 import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Contact> execute() {
-		return this.contactRepository.
+		return (List<Contact>) this.contactRepository.
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
-			collect(Collectors.toList());
+			collect(Collectors.groupingBy(Contact::getId,
+					                      Collectors.toList()
+					                      )
+					);
 	}
 	
 	//Properties
