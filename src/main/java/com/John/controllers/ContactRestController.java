@@ -22,8 +22,8 @@ import com.John.models.api.Contact;
 @RequestMapping(value = "/api/contact")
 public class ContactRestController {
 
-	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
-	public List<Contact> getContacts(@PathVariable UUID contactId) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public List<Contact> getContacts() {//@PathVariable UUID contactId) {
 		return (new ContactsQuery()).
 			//setContactId(contactId).
 			execute();
