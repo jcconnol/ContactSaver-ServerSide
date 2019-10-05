@@ -26,6 +26,15 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	}
 
 	//Properties
+	private String ownerId;
+	public String getOwnerId() {
+		return ownerId;
+	}
+	public ContactsQuery setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+		return this;
+	}
+	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
