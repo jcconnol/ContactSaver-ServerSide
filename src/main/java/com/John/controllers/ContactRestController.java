@@ -2,7 +2,6 @@ package com.John.controllers;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +17,6 @@ import com.John.commands.contacts.ContactQuery;
 import com.John.commands.contacts.ContactUpdateCommand;
 import com.John.commands.contacts.ContactsQuery;
 import com.John.models.api.Contact;
-import com.John.models.repositories.ContactRepository;
 
 @RestController
 @RequestMapping(value = "/api/contact")
@@ -26,14 +24,9 @@ public class ContactRestController {
 
 	@RequestMapping(value = "/{ownerId}", method = RequestMethod.GET)
 	public List<Contact> getContacts(@PathVariable String ownerId) {
-		return (new ContactRepository()).
-				all().
-				stream().
-				map(mp -> (new Contact(mp))).
-				collect(Collectors.toList());
-				//(new ContactsQuery()).
+		return (new ContactsQuery()).
 			//setOwnerId(ownerId).
-			//execute();
+			execute();
 	}
 
 	@RequestMapping(value = "/byName/{contactName}", method = RequestMethod.GET)

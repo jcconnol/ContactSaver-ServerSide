@@ -19,30 +19,13 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	@Override
 	public List<Contact> execute() {
 		return this.contactRepository.
-				all().
-				stream().
-				map(mp -> (new Contact(mp))).
-				collect(Collectors.toList());
-		/*
-		Map<UUID, List<Contact>> allContacts = this.contactRepository.
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
-			collect(Collectors.groupingBy(Contact::getId));
-		
-		return allContacts.get(this.contactId);*/
+			collect(Collectors.toList());
 	}
-	
+
 	//Properties
-	private String ownerId;
-	public String getOwnerId() {
-		return ownerId;
-	}
-	public ContactsQuery setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
-		return this;
-	}
-	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
