@@ -42,7 +42,7 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(ContactFieldNames.NAME).
+					fieldName(ContactFieldNames.ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
