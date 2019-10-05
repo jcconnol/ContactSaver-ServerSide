@@ -25,7 +25,7 @@ public class ContactRestController {
 	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
 	public List<Contact> getContacts(@PathVariable UUID contactId) {
 		return (new ContactsQuery()).
-			setContactId(contactId).
+			//setContactId(contactId).
 			execute();
 	}
 

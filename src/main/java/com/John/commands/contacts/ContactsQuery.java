@@ -35,6 +35,7 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	}
 	
 	//Properties
+	/*
 	private UUID contactId;
 	public UUID getContactId() {
 		return contactId;
@@ -42,13 +43,13 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 	public ContactsQuery setContactId(UUID contactId) {
 		this.contactId = contactId;
 		return this;
-	}
+	}*/
 	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
 	}
-	public ContactsQuery setProductRepository(ContactRepositoryInterface contactRepository) {
+	public ContactsQuery setContactRepository(ContactRepositoryInterface contactRepository) {
 		this.contactRepository = contactRepository;
 		return this;
 	}
