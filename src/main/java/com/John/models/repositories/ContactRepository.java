@@ -16,9 +16,11 @@ import com.John.models.entities.fieldnames.UserFieldNames;
 import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
+	//TODO make allwhere work
+	/*
 	@Override
 	public ContactEntity byOwnerId(String ownerId) {
-		return this.firstOrDefaultWhere(
+		return this.allWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
@@ -34,7 +36,7 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 				return ps;
 			}
 		);
-	}
+	}*/
 	
 	@Override
 	public ContactEntity byName(String name) {
