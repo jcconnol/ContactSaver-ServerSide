@@ -22,11 +22,11 @@ import com.John.models.api.Contact;
 @RequestMapping(value = "/api/contact")
 public class ContactRestController {
 
-	@RequestMapping(value = "/{ownerId}", method = RequestMethod.GET)
-	public List<Contact> getContacts(@PathVariable String ownerId) {
-		return (new ContactsQuery()).
-			setOwnerId(ownerId).
-			execute();
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public List<Contact> getContacts(){//@PathVariable String ownerId) {
+		return (new ContactsQuery()).execute();
+			//setOwnerId(ownerId).
+			//execute();
 	}
 
 	@RequestMapping(value = "/byName/{contactName}", method = RequestMethod.GET)

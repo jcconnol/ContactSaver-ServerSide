@@ -70,8 +70,8 @@ public class ContactEntity extends BaseEntity<ContactEntity> {
 	public Contact synchronize(Contact apiContact) {
 		this.setNumber(apiContact.getNumber());
 		this.setName(apiContact.getName());
+		this.setOwnerId(apiContact.getOwnerId());
 		
-		apiContact.setOwnerId(this.getOwnerId());
 		apiContact.setId(this.getId());
 		apiContact.setCreatedOn(this.getCreatedOn());
 		
