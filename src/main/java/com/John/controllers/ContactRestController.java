@@ -28,7 +28,14 @@ public class ContactRestController {
 			//setOwnerId(ownerId).
 			//execute();
 	}
-
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Contact getContact(@PathVariable UUID id) {
+		return (new ContactQuery()).
+			setContactId(id).
+			execute();
+	}
+	
 	@RequestMapping(value = "/byName/{contactName}", method = RequestMethod.GET)
 	public Contact getContactByName(@PathVariable String contactName) {
 		return (new ContactByNameQuery()).
