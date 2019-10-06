@@ -21,10 +21,19 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
-			collect(Collectors.toList());
+			collect(Collectors.groupingBy(Contact::getOwnerId)).
+			get(this.ownerId);
 	}
 
 	//Properties
+	private String ownerId;
+	public String getOwnerId() {
+		return this.ownerId;
+	}
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+	
 	private ContactRepositoryInterface contactRepository;
 	public ContactRepositoryInterface getContactRepository() {
 		return this.contactRepository;
