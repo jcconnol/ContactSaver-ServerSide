@@ -1,6 +1,7 @@
 package com.John.models.repositories;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.UUID;
 
 import com.John.dataaccess.repository.BaseRepository;
@@ -17,10 +18,10 @@ import com.John.models.repositories.interfaces.ContactRepositoryInterface;
 
 public class ContactRepository extends BaseRepository<ContactEntity> implements ContactRepositoryInterface {
 	//TODO make allwhere work
-	/*
+	
 	@Override
 	public ContactEntity byOwnerId(String ownerId) {
-		return this.allWhere(
+		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					postgreFunction(PostgreFunctionType.LOWER).
@@ -36,7 +37,7 @@ public class ContactRepository extends BaseRepository<ContactEntity> implements 
 				return ps;
 			}
 		);
-	}*/
+	}
 	
 	@Override
 	public ContactEntity byName(String name) {
