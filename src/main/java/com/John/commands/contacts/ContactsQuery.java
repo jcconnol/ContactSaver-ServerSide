@@ -22,8 +22,7 @@ public class ContactsQuery implements ResultCommandInterface<List<Contact>> {
 			all().
 			stream().
 			map(mp -> (new Contact(mp))).
-			collect(Collectors.groupingBy(Contact::getOwnerId)).
-			get(this.ownerId);
+			collect(Collectors.toList());
 	}
 
 	//Properties
